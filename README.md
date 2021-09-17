@@ -1,2 +1,2 @@
 # CPOAproj
-CPOA Projet ( TP )
+CPOA Projet ( TD )
