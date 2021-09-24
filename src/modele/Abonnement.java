@@ -4,6 +4,8 @@ import java.sql.*;
 import java.time.*;
 import java.time.format.*;
 
+import connexion.Connexion;
+
 public class Abonnement {
 	
 	//Supprimer Abonnement

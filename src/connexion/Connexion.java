@@ -1,4 +1,4 @@
-package modele;
+package connexion;
 
 import java.sql.*;
 

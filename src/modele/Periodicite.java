@@ -2,10 +2,12 @@ package modele;
 
 import java.sql.*;
 
+import connexion.Connexion;
+
 public class Periodicite {
 	
-	int id_periodicite;
-	String libelle;
+	private int id_periodicite;
+	private String libelle;
 	
 	public Periodicite() {}
 	

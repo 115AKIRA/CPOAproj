@@ -2,6 +2,8 @@ package modele;
 
 import java.sql.*;
 
+import connexion.Connexion;
+
 public class Client {
 
     //Supprimer Client
