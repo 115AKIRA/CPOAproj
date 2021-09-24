@@ -1,6 +1,6 @@
 package test;
 
-import pojo.*;
+import modele.*;
 
 public class TestClient {
 	

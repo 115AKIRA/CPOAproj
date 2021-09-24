@@ -1,4 +1,4 @@
-package pojo;
+package modele;
 
 import java.sql.*;
 import java.time.*;
