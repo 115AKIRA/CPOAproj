@@ -4,6 +4,7 @@ import modele.*;
 
 public class TestClient {
 	
+	@SuppressWarnings("unused")
 	public static void main (String[] args) {
 	
 	Periodicite p = new Periodicite();
