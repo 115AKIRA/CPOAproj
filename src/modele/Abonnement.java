@@ -8,6 +8,14 @@ import connexion.Connexion;
 
 public class Abonnement {
 	
+	private int id_client;
+	
+	
+	
+	
+	
+	
+	
 	//Supprimer Abonnement
 
 	public void AbonnemSuppr(int id_abonnement) {
