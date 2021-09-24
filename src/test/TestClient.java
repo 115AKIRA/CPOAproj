@@ -9,8 +9,12 @@ public class TestClient {
 	Periodicite p = new Periodicite();
 	Revue r = new Revue();
 	Client c = new Client();
+	Abonnement a = new Abonnement();
 	
-	c.ClientSuppr(1);
+	CharSequence datedeb = "26/07/2003";
+	CharSequence datefin = "30/07/2003";
+	
+	a.AbonnemSuppr(1);
 
 	}
 	
