@@ -9,7 +9,7 @@ import dao.ClientDAO;
 import modele.Client;
 
 
-public class MySQLClientDAO implements ClientDAO{
+public class MySQLClientDAO implements ClientDAO {
  
     private static MySQLClientDAO instance;
 
@@ -128,7 +128,7 @@ public class MySQLClientDAO implements ClientDAO{
 			cList.add(new Client(resultSet.getInt("id_client"),
 					resultSet.getString("nom"),
 					resultSet.getString("prenom"),
-					resultSet.getString("nom=_rue"),
+					resultSet.getString("no_rue"),
 					resultSet.getString("voie"),
 					resultSet.getString("code_postal"),
 					resultSet.getString("ville"),
@@ -162,7 +162,7 @@ public class MySQLClientDAO implements ClientDAO{
 			cList.add(new Client(resultSet.getInt("id_client"),
 					resultSet.getString("nom"),
 					resultSet.getString("prenom"),
-					resultSet.getString("nom=_rue"),
+					resultSet.getString("no_rue"),
 					resultSet.getString("voie"),
 					resultSet.getString("code_postal"),
 					resultSet.getString("ville"),
@@ -174,5 +174,39 @@ public class MySQLClientDAO implements ClientDAO{
 			}
 		
 		return cList;
+	}
+
+	@Override
+	public Client getById(int id) throws Exception {
+
+		Client cl = null;
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("select * from Client where id_client=?");
+			requete.setInt(1, id);
+			
+			ResultSet resultSet = requete.executeQuery();
+
+		if (resultSet.next()) {
+			cl = new Client();
+			cl.setId_client(resultSet.getInt("id_periodicite"));
+			cl.setNom(resultSet.getString("nom"));
+			cl.setPrenom(resultSet.getString("nom"));
+			cl.setNo_rue(resultSet.getString("no_rue"));
+			cl.setVoie(resultSet.getString("voie"));
+			cl.setCode_postal(resultSet.getString("code_postal"));
+			cl.setVille(resultSet.getString("ville"));
+			cl.setPays(resultSet.getString("pays"));
+		}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return cl;
 	}
 }
