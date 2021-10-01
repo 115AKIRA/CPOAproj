@@ -1,12 +1,7 @@
 package dao.mysql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import connexion.Connexion;
 import dao.PeriodiciteDAO;
@@ -15,9 +10,6 @@ import modele.Periodicite;
 public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 
 	private static MySQLPeriodiciteDAO instance;
-
-	private List<Periodicite> donnees;
-
 
 	public static MySQLPeriodiciteDAO getInstance() {
 
@@ -146,7 +138,8 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 			ResultSet resultSet = requete.executeQuery();
 
 		while(resultSet.next()) {
-			pList.add(new Periodicite(resultSet.getInt("id_periodicite"),resultSet.getString("libelle")));
+			pList.add(new Periodicite(resultSet.getInt("id_periodicite"),
+					resultSet.getString("libelle")));
 		}
 			
 	} catch (SQLException sqle) {

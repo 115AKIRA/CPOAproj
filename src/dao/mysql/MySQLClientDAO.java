@@ -1,8 +1,9 @@
 package dao.mysql;
 
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
+import connexion.Connexion;
 import dao.ClientDAO;
 
 import modele.Client;
@@ -12,8 +13,6 @@ public class MySQLClientDAO implements ClientDAO{
 
     
     private static MySQLClientDAO instance;
-
-    private List<Client> donnees;
 
 
     public static MySQLClientDAO getInstance() {
@@ -25,84 +24,190 @@ public class MySQLClientDAO implements ClientDAO{
         return instance;
     }
 
-    private MySQLClientDAO() {
-
-        this.donnees = new ArrayList<Client>();
-
-        this.donnees.add(new Client (6,"jean", "pierre", "ronce","voie1","57000","metz","France"));
-        this.donnees.add(new Client (5,"jeanne", "pierre", "ronce","voie1","57000","metz","France"));
-    }
+    private MySQLClientDAO() {}
 
 
     @Override
-    public boolean create(Client objet) {
+	public boolean create(Client objet) {
+		
+		int nbLigne = 0; 
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+	        laConnexion.prepareStatement("insert into Client (nom, prenom, no_rue, voie, code_postal, ville, pays) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+	        requete.setString(1, objet.getNom());
+	        requete.setString(2, objet.getPrenom());
+	        requete.setString(3, objet.getNo_rue());
+	        requete.setString(4, objet.getVoie());
+	        requete.setString(5, objet.getCode_postal());
+	        requete.setString(6, objet.getVille());
+	        requete.setString(7, objet.getPays());
+			
+			nbLigne = requete.executeUpdate();
+			
+			ResultSet res = requete.getGeneratedKeys();
+			if ( res.next() ) {
+				objet.setId_client(res.getInt(1));
+			}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return nbLigne != 0;
+	}
 
-        objet.setId_client(3);
-        // Ne fonctionne que si l'objet m�tier est bien fait...
-        while (this.donnees.contains(objet)) {
+	@Override
+	public boolean update(Client objet) {
+		
+		int nbLigne = 0; 
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("update Client set nom =?, prenom =?, no_rue =?, voie =?, code_postal=?, ville=?, pays=? where id_client =?");
+			requete.setString(1, objet.getNom());
+            requete.setString(2, objet.getPrenom());
+            requete.setString(3, objet.getNo_rue());
+            requete.setString(4, objet.getVoie());
+            requete.setString(5, objet.getCode_postal());
+            requete.setString(6, objet.getVille());
+            requete.setString(7, objet.getPays());
+            requete.setInt(8, objet.getId_client());
+			
+			nbLigne = requete.executeUpdate();
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return nbLigne != 0;
+	}
 
-            objet.setId_client(objet.getId_client() + 1);
-        }
-        boolean ok = this.donnees.add(objet);
-        
-        return ok;
-    }
+	@Override
+	public boolean delete(Client objet) {
+		
+		int nbLigne = 0; 
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("delete from Client where id_client=?");
+			requete.setInt(1, objet.getId_client());
+			
+			nbLigne = requete.executeUpdate();
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return nbLigne != 0;
+	}
 
-    @Override
-    public boolean update(Client objet) {
-        
-        // Ne fonctionne que si l'objet m�tier est bien fait...
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-        } else {
-            
-            this.donnees.set(idx, objet);
-        }
-        
-        return true;
-    }
+	@Override
+	public Client getById(int id) {
+		
+		Client cl = null;
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("select * from Client where id_client=?");
+			requete.setInt(1, id);
+			
+			ResultSet resultSet = requete.executeQuery();
 
-    @Override
-    public boolean delete(Client objet) {
+		if (resultSet.next()) {
+			cl = new Client();
+			cl.setId_client(resultSet.getInt("id_client"));
+			cl.setNom(resultSet.getString("nom"));
+			cl.setPrenom(resultSet.getString("prenom"));
+			cl.setNo_rue(resultSet.getString("no_rue"));
+			cl.setVoie(resultSet.getString("voie"));
+			cl.setCode_postal(resultSet.getString("code_postal"));
+			cl.setVille(resultSet.getString("ville"));
+			cl.setPays(resultSet.getString("pays"));
+		}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return cl;
+	}
 
-        Client supprime;
-        
-        // Ne fonctionne que si l'objet m�tier est bien fait...
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-        } else {
-            supprime = this.donnees.remove(idx);
-        }
-        
-        return objet.equals(supprime);
-    }
+	@Override
+	public ArrayList<Client> findAll() {
+		
+		ArrayList<Client> cList = new ArrayList<Client>();
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("select * from Periodicite");
+			
+			ResultSet resultSet = requete.executeQuery();
 
-    @Override
-    public Client getById(int id) {
-        // Ne fonctionne que si l'objet m�tier est bien fait...
-        int idx = this.donnees.indexOf(new Client(id, "test", "test", "test", "test", "test", "test", "test"));
-        if (idx == -1) {
-            throw new IllegalArgumentException("Aucun objet ne poss�de cet identifiant");
-        } else {
-            return this.donnees.get(idx);
-        }
-    }
-
-    @Override
-    public ArrayList<Client> findAll() {
-        return (ArrayList<Client>) this.donnees;
-    }
+		while(resultSet.next()) {
+			cList.add(new Client(resultSet.getInt("id_client"),
+					resultSet.getString("nom"),
+					resultSet.getString("prenom"),
+					resultSet.getString("nom=_rue"),
+					resultSet.getString("voie"),
+					resultSet.getString("code_postal"),
+					resultSet.getString("ville"),
+					resultSet.getString("pays")));
+		}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return cList;
+	}
 
 	@Override
 	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws Exception {
-		int nomx = this.donnees.indexOf(new Client(0, nom, "test", "test", "test", "test", "test", "test"));
-		int prenomx = this.donnees.indexOf(new Client(0, "test", prenom, "test", "test", "test", "test", "test"));
-        if ( (nomx == -1) || (prenomx == -1) ){
-            throw new IllegalArgumentException("Aucun objet ne poss�de ces identifiants");
-        } else {
-            return (ArrayList<Client>) this.donnees;
-        }
+		
+		ArrayList<Client> cList = new ArrayList<Client>();
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("select * from Client where nom=?, prenom=?");
+			requete.setString(1, nom);
+			requete.setString(2, prenom);
+			
+			ResultSet resultSet = requete.executeQuery();
+
+		while (resultSet.next()) {
+			cList.add(new Client(resultSet.getInt("id_client"),
+					resultSet.getString("nom"),
+					resultSet.getString("prenom"),
+					resultSet.getString("nom=_rue"),
+					resultSet.getString("voie"),
+					resultSet.getString("code_postal"),
+					resultSet.getString("ville"),
+					resultSet.getString("pays")));
+		}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return cList;
 	}
 }

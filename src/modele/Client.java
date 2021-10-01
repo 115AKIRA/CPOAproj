@@ -161,11 +161,6 @@ public class Client {
 		return true;
 	}
 
-	
-	
-	
-	
-	
 	 //A SupprimerClient
 	
 	public void ClientSuppr(int id_client) {
@@ -246,8 +241,6 @@ public class Client {
                 requete.setString(6, ville);
                 requete.setString(7, pays);
                 requete.setInt(8, id_client);
-                
-                
                 
                 int nbLignes = requete.executeUpdate();
                 System.out.println("Update:" + nbLignes);
