@@ -7,21 +7,13 @@ import java.time.format.*;
 import connexion.Connexion;
 
 public class Abonnement {
-	
-	
-	
-	
+
 	private int id_client;
 	private CharSequence date_debut;
 	private CharSequence date_fin;
 	private int id_abonnement;
 	private int id_revue;
-	
-	
-	
-	
-	
-	
+
 	public Abonnement(int id_client, CharSequence date_debut, CharSequence date_fin, int id_abonnement, int id_revue) {
 		super();
 		this.id_client = id_client;
@@ -31,97 +23,53 @@ public class Abonnement {
 		this.id_revue = id_revue;
 	}
 
-
-
-
+	public Abonnement() {}
 
 	public int getId_abonnement() {
 		return id_abonnement;
 	}
 
-
-
-
-
 	public void setId_abonnement(int id_abonnement) {
 		this.id_abonnement = id_abonnement;
 	}
-
-	
-
-	
-	
-	
 	
 	public Abonnement(int id_revue) {
 		super();
 		this.id_revue = id_revue;
 	}
 
-
-
-
-
-	//Supprimer Abonnement
-
 	public int getId_client() {
 		return id_client;
 	}
 
-
+	
 	public void setId_client(int id_client) {
 		this.id_client = id_client;
 	}
-
-
 
 	public CharSequence getDate_debut() {
 		return date_debut;
 	}
 
-
-
-
-
 	public void setDate_debut(CharSequence date_debut) {
 		this.date_debut = date_debut;
 	}
-
-
-
-
 
 	public CharSequence getDate_fin() {
 		return date_fin;
 	}
 
-
-
-
-
 	public void setDate_fin(CharSequence date_fin) {
 		this.date_fin = date_fin;
 	}
-
-
-
-
 
 	public int getId_revue() {
 		return id_revue;
 	}
 
-
-
-
-
 	public void setId_revue(int id_revue) {
 		this.id_revue = id_revue;
 	}
-
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -133,10 +81,6 @@ public class Abonnement {
 		result = prime * result + id_revue;
 		return result;
 	}
-
-
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -165,8 +109,7 @@ public class Abonnement {
 	}
 
 
-
-
+	//Supprimer Abonnement
 
 	public void AbonnemSuppr(int id_abonnement) {
 		try {

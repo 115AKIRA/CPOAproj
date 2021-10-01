@@ -17,11 +17,11 @@ public class Periodicite {
 		this.libelle = libelle;
 	}
 
-	public int getId() {
+	public int getId_periodicite() {
 		return id_periodicite;
 	}
 
-	public void setId(int id_periodicite) {
+	public void setId_periodicite(int id_periodicite) {
 		this.id_periodicite = id_periodicite;
 	}
 

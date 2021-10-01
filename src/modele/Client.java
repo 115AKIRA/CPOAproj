@@ -33,11 +33,11 @@ public class Client {
 
 	
     
-    public int getId() {
+    public int getId_client() {
 		return id_client;
 	}
 
-	public void setId(int id_client) {
+	public void setId_client(int id_client) {
 		this.id_client = id_client;
 	}
 

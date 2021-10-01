@@ -25,11 +25,11 @@ public class Revue {
 		
 		public Revue() {}
 
-		public int getId() {
+		public int getId_revue() {
 			return id_revue;
 		}
 
-		public void setId(int id_revue) {
+		public void setId_revue(int id_revue) {
 			this.id_revue = id_revue;
 		}
 

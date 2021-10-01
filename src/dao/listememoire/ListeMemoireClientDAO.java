@@ -37,11 +37,11 @@ public class ListeMemoireClientDAO implements ClientDAO {
     @Override
     public boolean create(Client objet) {
 
-        objet.setId(1);
+        objet.setId_client(1);
         // Ne fonctionne que si l'objet m�tier est bien fait...
         while (this.donnees.contains(objet)) {
 
-            objet.setId(objet.getId() + 1);
+            objet.setId_client(objet.getId_client() + 1);
         }
         boolean ok = this.donnees.add(objet);
         
@@ -93,5 +93,15 @@ public class ListeMemoireClientDAO implements ClientDAO {
     @Override
     public ArrayList<Client> findAll() {
         return (ArrayList<Client>) this.donnees;
+    }
+	@Override
+	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws Exception {
+		int nomx = this.donnees.indexOf(new Client(0, nom, "test", "test", "test", "test", "test", "test"));
+		int prenomx = this.donnees.indexOf(new Client(0, "test", prenom, "test", "test", "test", "test", "test"));
+        if ( (nomx == -1) || (prenomx == -1) ){
+            throw new IllegalArgumentException("Aucun objet ne poss�de ces identifiants");
+        } else {
+            return (ArrayList<Client>) this.donnees;
+        }
     }
 }
