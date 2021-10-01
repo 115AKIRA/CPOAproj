@@ -1,10 +1,11 @@
 package dao.mysql;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import java.sql.*;
+import connexion.Connexion;
 import dao.AbonnementDAO;
-
+import modele.Abonnement;
 import modele.Abonnement;
 
 
@@ -12,7 +13,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 
 	 private static MySQLAbonnementDAO instance;
 
-	    private List<Abonnement> donnees;
+	  
 
 
 	    public static MySQLAbonnementDAO getInstance() {
@@ -24,77 +25,137 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 	        return instance;
 	    }
 	    
-	    private MySQLAbonnementDAO() {
-
-	        this.donnees = new ArrayList<Abonnement>();
-
-	        this.donnees.add(new Abonnement (8,"04/04/2020", "04/04/2021",9,5));
-	        this.donnees.add(new Abonnement (7,"25/01/2019", "25/01/2020",15,27));
-	    }
-
-	    
-	    @Override
-	    public boolean create(Abonnement objet) {
-
-	        objet.setId_abonnement(3);
-	        // Ne fonctionne que si l'objet m�tier est bien fait...
-	        while (this.donnees.contains(objet)) {
-
-	            objet.setId_abonnement(objet.getId_abonnement() + 1);
-	        }
-	        boolean ok = this.donnees.add(objet);
-	        
-	        return ok;
-	    }
+	    private MySQLAbonnementDAO() {}
 
 	    @Override
-	    public boolean update(Abonnement objet) {
-	        
-	        // Ne fonctionne que si l'objet m�tier est bien fait...
-	        int idx = this.donnees.indexOf(objet);
-	        if (idx == -1) {
-	            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-	        } else {
-	            
-	            this.donnees.set(idx, objet);
-	        }
-	        
-	        return true;
-	    }
+		public boolean create(Abonnement objet) {
+			
+			int nbLigne = 0; 
+			
+			try {
+				Connexion c = new Connexion();
+				Connection laConnexion = c.creeConnexion();
+				PreparedStatement requete = 
+				
+				laConnexion.prepareStatement("insert into Abonnement (date_debut) values(?)", Statement.RETURN_GENERATED_KEYS);
+				requete.setString(1, objet.get());
+				
+				nbLigne = requete.executeUpdate();
+				
+				ResultSet res = requete.getGeneratedKeys();
+				if ( res.next() ) {
+					objet.setId_revue(res.getInt(1));
+				}
+				
+		} catch (SQLException sqle) {
+				System.out.println("Pb dans select " + sqle.getMessage());
+				}
+			
+			return nbLigne != 0;
+		}
 
-	    @Override
-	    public boolean delete(Abonnement objet) {
+		@Override
+		public boolean update(Abonnement objet) {
+			
+			int nbLigne = 0; 
+			
+			try {
+				Connexion c = new Connexion();
+				Connection laConnexion = c.creeConnexion();
+				PreparedStatement requete = 
+				
+				laConnexion.prepareStatement("update Abonnement set Titre =? where id_revue =?");
+				requete.setString(1, objet.getTitre());
+				requete.setInt(2, objet.getId_revue());
+				
+				nbLigne = requete.executeUpdate();
+				
+		} catch (SQLException sqle) {
+				System.out.println("Pb dans select " + sqle.getMessage());
+				}
+			
+			return nbLigne != 0;
+		}
 
-	        Abonnement supprime;
-	        
-	        // Ne fonctionne que si l'objet m�tier est bien fait...
-	        int idx = this.donnees.indexOf(objet);
-	        if (idx == -1) {
-	            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-	        } else {
-	            supprime = this.donnees.remove(idx);
-	        }
-	        
-	        return objet.equals(supprime);
-	    }
+		@Override
+		public boolean delete(Abonnement objet) {
+			
+			int nbLigne = 0; 
+			
+			try {
+				Connexion c = new Connexion();
+				Connection laConnexion = c.creeConnexion();
+				PreparedStatement requete = 
+				
+				laConnexion.prepareStatement("delete from Abonnement where id_revue=?");
+				requete.setInt(1, objet.getId_periodicite());
+				
+				nbLigne = requete.executeUpdate();
+				
+		} catch (SQLException sqle) {
+				System.out.println("Pb dans select " + sqle.getMessage());
+				}
+			
+			return nbLigne != 0;
+		}
 
-	    @Override
-	    public Abonnement getById(int id) {
-	        // Ne fonctionne que si l'objet m�tier est bien fait...
-	    	
-	        int idx = this.donnees.indexOf(new Abonnement(id, "test", "test",id,id));
-	        if (idx == -1) {
-	            throw new IllegalArgumentException("Aucun objet ne poss�de cet identifiant");
-	        } else {
-	            return this.donnees.get(idx);
-	        }
-	    }
+		@Override
+		public Abonnement getById(int id) {
+			
+			Abonnement r = null;
+			
+			try {
+				Connexion c = new Connexion();
+				Connection laConnexion = c.creeConnexion();
+				PreparedStatement requete = 
+				
+				laConnexion.prepareStatement("select * from Abonnement where id_revue=?");
+				requete.setInt(1, id);
+				
+				ResultSet resultSet = requete.executeQuery();
 
-	    @Override
-	    public ArrayList<Abonnement> findAll() {
-	        return (ArrayList<Abonnement>) this.donnees;
-	    }
-	}
-	    
-	    
+			if (resultSet.next()) {
+				r = new Abonnement();
+				r.setId_revue(resultSet.getInt("id_revue"));
+				r.setTitre(resultSet.getString("titre"));
+				r.setDescription(resultSet.getString("description"));
+				r.setTarif_numero(resultSet.getFloat("tarif_numero"));
+				r.setVisuel(resultSet.getString("visuel"));
+				r.setId_periodicite(resultSet.getInt("id_periodicite"));
+			}
+				
+		} catch (SQLException sqle) {
+				System.out.println("Pb dans select " + sqle.getMessage());
+				}
+			
+			return r;
+		}
 
+		@Override
+		public ArrayList<Abonnement> findAll() {
+			
+			ArrayList<Abonnement> rList = new ArrayList<Abonnement>();
+			
+			try {
+				Connexion c = new Connexion();
+				Connection laConnexion = c.creeConnexion();
+				PreparedStatement requete = 
+				
+				laConnexion.prepareStatement("select * from Abonnement");
+				
+				ResultSet resultSet = requete.executeQuery();
+
+			while(resultSet.next()) {
+				rList.add(new Abonnement(resultSet.getInt("id_revue")
+						,resultSet.getString("titre"),resultSet.getString("description"),resultSet.getFloat("tarif_numero"),resultSet.getString("visuel"),resultSet.getInt("id_periodicite")));
+			}
+				
+		} catch (SQLException sqle) {
+				System.out.println("Pb dans select " + sqle.getMessage());
+				}
+			
+			return rList;
+			
+		}
+}
+	   
