@@ -14,14 +14,54 @@ public class Abonnement {
 	private int id_client;
 	private CharSequence date_debut;
 	private CharSequence date_fin;
+	private int id_abonnement;
 	private int id_revue;
 	
-	public Abonnement() {};
+	
+	
+	
+	
+	
+	public Abonnement(int id_client, CharSequence date_debut, CharSequence date_fin, int id_abonnement, int id_revue) {
+		super();
+		this.id_client = id_client;
+		this.date_debut = date_debut;
+		this.date_fin = date_fin;
+		this.id_abonnement = id_abonnement;
+		this.id_revue = id_revue;
+	}
+
+
+
+
+
+	public int getId_abonnement() {
+		return id_abonnement;
+	}
+
+
+
+
+
+	public void setId_abonnement(int id_abonnement) {
+		this.id_abonnement = id_abonnement;
+	}
+
+	
 
 	
 	
 	
 	
+	public Abonnement(int id_revue) {
+		super();
+		this.id_revue = id_revue;
+	}
+
+
+
+
+
 	//Supprimer Abonnement
 
 	public int getId_client() {
