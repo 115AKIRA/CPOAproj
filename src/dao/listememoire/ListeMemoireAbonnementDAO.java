@@ -28,9 +28,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 	        this.donnees.add(new Abonnement (7,"25/01/2019", "25/01/2020",15,27));
 	    }
 	    
-	    
-	    
-	    
+
 	    @Override
 	    public boolean create(Abonnement objet) {
 
@@ -77,7 +75,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 	    }
 
 	    @Override
-	    public Abonnement getById(int id  ) {
+	    public Abonnement getById(int id) {
 	        // Ne fonctionne que si l'objet m�tier est bien fait...
 	        int idx = this.donnees.indexOf(new Abonnement(id, "test", "test",id,id));
 	        if (idx == -1) {

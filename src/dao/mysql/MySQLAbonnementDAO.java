@@ -28,8 +28,6 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 
 	        this.donnees = new ArrayList<Abonnement>();
 
-	        
-	      
 	        this.donnees.add(new Abonnement (8,"04/04/2020", "04/04/2021",9,5));
 	        this.donnees.add(new Abonnement (7,"25/01/2019", "25/01/2020",15,27));
 	    }
