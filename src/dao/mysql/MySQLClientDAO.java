@@ -10,8 +10,7 @@ import modele.Client;
 
 
 public class MySQLClientDAO implements ClientDAO{
-
-    
+ 
     private static MySQLClientDAO instance;
 
 
@@ -25,7 +24,6 @@ public class MySQLClientDAO implements ClientDAO{
     }
 
     private MySQLClientDAO() {}
-
 
     @Override
 	public boolean create(Client objet) {
@@ -111,40 +109,7 @@ public class MySQLClientDAO implements ClientDAO{
 		return nbLigne != 0;
 	}
 
-	@Override
-	public Client getById(int id) {
-		
-		Client cl = null;
-		
-		try {
-			Connexion c = new Connexion();
-			Connection laConnexion = c.creeConnexion();
-			PreparedStatement requete = 
-			
-			laConnexion.prepareStatement("select * from Client where id_client=?");
-			requete.setInt(1, id);
-			
-			ResultSet resultSet = requete.executeQuery();
-
-		if (resultSet.next()) {
-			cl = new Client();
-			cl.setId_client(resultSet.getInt("id_client"));
-			cl.setNom(resultSet.getString("nom"));
-			cl.setPrenom(resultSet.getString("prenom"));
-			cl.setNo_rue(resultSet.getString("no_rue"));
-			cl.setVoie(resultSet.getString("voie"));
-			cl.setCode_postal(resultSet.getString("code_postal"));
-			cl.setVille(resultSet.getString("ville"));
-			cl.setPays(resultSet.getString("pays"));
-		}
-			
-	} catch (SQLException sqle) {
-			System.out.println("Pb dans select " + sqle.getMessage());
-			}
-		
-		return cl;
-	}
-
+	
 	@Override
 	public ArrayList<Client> findAll() {
 		

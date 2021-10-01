@@ -1,16 +1,22 @@
 package dao.mysql;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.ArrayList;
+
+
+import java.sql.*;
+
+import connexion.Connexion;
 import dao.RevueDAO;
-import modele.Revue;
+
+import modele.Revue ;
+
 
 public class MySQLRevueDAO implements RevueDAO {
 
 	private static MySQLRevueDAO instance;
 
-	private List<Revue> donnees;
+	
 
 
 	public static MySQLRevueDAO getInstance() {
@@ -22,73 +28,139 @@ public class MySQLRevueDAO implements RevueDAO {
 		return instance;
 	}
 
-	private MySQLRevueDAO() {
-
-		this.donnees = new ArrayList<Revue>();
-
-		this.donnees.add(new Revue(1, "Titre", "Description", 15 , "Visuel", 1));
-		this.donnees.add(new Revue(2, "Titre", "Description", 15 , "Visuel", 1));
-	}
-
+	private MySQLRevueDAO() {}
+	
+	
+	
 
 	@Override
 	public boolean create(Revue objet) {
-
-		objet.setId_revue(3);
-		// Ne fonctionne que si l'objet métier est bien fait...
-		while (this.donnees.contains(objet)) {
-
-			objet.setId_revue(objet.getId_revue() + 1);
-		}
-		boolean ok = this.donnees.add(objet);
 		
-		return ok;
+		int nbLigne = 0; 
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("insert into Revue (titre) values(?)", Statement.RETURN_GENERATED_KEYS);
+			requete.setString(1, objet.getTitre());
+			
+			nbLigne = requete.executeUpdate();
+			
+			ResultSet res = requete.getGeneratedKeys();
+			if ( res.next() ) {
+				objet.setId_revue(res.getInt(1));
+			}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return nbLigne != 0;
 	}
 
 	@Override
 	public boolean update(Revue objet) {
 		
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-		} else {
-			
-			this.donnees.set(idx, objet);
-		}
+		int nbLigne = 0; 
 		
-		return true;
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("update Revue set Titre =? where id_revue =?");
+			requete.setString(1, objet.getTitre());
+			requete.setInt(2, objet.getId_revue());
+			
+			nbLigne = requete.executeUpdate();
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return nbLigne != 0;
 	}
 
 	@Override
 	public boolean delete(Revue objet) {
-
-		Revue supprime;
 		
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-		} else {
-			supprime = this.donnees.remove(idx);
-		}
+		int nbLigne = 0; 
 		
-		return objet.equals(supprime);
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("delete from Revue where id_revue=?");
+			requete.setInt(1, objet.getId_periodicite());
+			
+			nbLigne = requete.executeUpdate();
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return nbLigne != 0;
 	}
 
 	@Override
 	public Revue getById(int id) {
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(new Revue(id, "test", "test", 0 , "test", 0));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
-		} else {
-			return this.donnees.get(idx);
+		
+		Revue r = null;
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("select * from Revue where id_revue=?");
+			requete.setInt(1, id);
+			
+			ResultSet resultSet = requete.executeQuery();
+
+		if (resultSet.next()) {
+			r = new Revue();
+			r.setId_revue(resultSet.getInt("id_revue"));
+			r.setTitre(resultSet.getString("titre"));
+			r.setDescription(resultSet.getString("description"));
+			r.setTarif_numero(resultSet.getFloat("tarif_numero"));
+			r.setVisuel(resultSet.getString("visuel"));
+			r.setId_periodicite(resultSet.getInt("id_periodicite"));
 		}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return r;
 	}
 
 	@Override
 	public ArrayList<Revue> findAll() {
-		return (ArrayList<Revue>) this.donnees;
+		
+		ArrayList<Revue> rList = new ArrayList<Revue>();
+		
+		try {
+			Connexion c = new Connexion();
+			Connection laConnexion = c.creeConnexion();
+			PreparedStatement requete = 
+			
+			laConnexion.prepareStatement("select * from Revue");
+			
+			ResultSet resultSet = requete.executeQuery();
+
+		while(resultSet.next()) {
+			rList.add(new Revue(resultSet.getInt("id_revue")
+					,resultSet.getString("titre"),resultSet.getString("description"),resultSet.getFloat("tarif_numero"),resultSet.getString("visuel"),resultSet.getInt("id_periodicite")));
+		}
+			
+	} catch (SQLException sqle) {
+			System.out.println("Pb dans select " + sqle.getMessage());
+			}
+		
+		return rList;
+		
 	}
-}
+	}
