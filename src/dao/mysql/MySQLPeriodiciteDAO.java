@@ -24,10 +24,10 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 
 	private MySQLPeriodiciteDAO() {
 
-		this.donnees = new ArrayList<Periodicite>();
-
-		this.donnees.add(new Periodicite(1, "Mensuel"));
-		this.donnees.add(new Periodicite(2, "Quotidien"));
+		Periodicite p = new Periodicite();
+		
+		p.PeriodAjout("Mensuel");
+		p.PeriodAjout("Quotidien");
 	}
 
 
@@ -60,18 +60,10 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 
 	@Override
 	public boolean delete(Periodicite objet) {
-
-		Periodicite supprime;
 		
-		// Ne fonctionne que si l'objet m�tier est bien fait...
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-		} else {
-			supprime = this.donnees.remove(idx);
-		}
+		objet.PeriodSuppr(objet.getId_periodicite());
 		
-		return objet.equals(supprime);
+		return true;
 	}
 
 	@Override
