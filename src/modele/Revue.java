@@ -13,6 +13,7 @@ public class Revue {
 	private String visuel;
 	private int id_periodicite;
 
+	
 		public Revue(int id_revue, String titre, String description, float tarif_numero, String visuel,int id_periodicite) {
 		super();
 		this.id_revue = id_revue;

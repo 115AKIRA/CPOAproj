@@ -27,10 +27,9 @@ public class MySQLClientDAO implements ClientDAO{
 
     private MySQLClientDAO() {
 
-        this.donnees = new ArrayList<Client>();
+    
 
-        this.donnees.add(new Client (6,"jean", "pierre", "ronce","voie1","57000","metz","France"));
-        this.donnees.add(new Client (5,"jeanne", "pierre", "ronce","voie1","57000","metz","France"));
+       
     }
 
 
@@ -48,6 +47,8 @@ public class MySQLClientDAO implements ClientDAO{
         return ok;
     }
 
+    
+    
     @Override
     public boolean update(Client objet) {
         
@@ -67,8 +68,8 @@ public class MySQLClientDAO implements ClientDAO{
     public boolean delete(Client objet) {
 
         Client supprime;
+       
         
-        // Ne fonctionne que si l'objet m�tier est bien fait...
         int idx = this.donnees.indexOf(objet);
         if (idx == -1) {
             throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
@@ -81,8 +82,8 @@ public class MySQLClientDAO implements ClientDAO{
 
     @Override
     public Client getById(int id) {
-        // Ne fonctionne que si l'objet m�tier est bien fait...
-        int idx = this.donnees.indexOf(new Client(id, "test", "test", "test", "test", "test", "test", "test"));
+
+    	int idx = this.donnees.indexOf(new Client(id, "test", "test", "test", "test", "test", "test", "test"));
         if (idx == -1) {
             throw new IllegalArgumentException("Aucun objet ne poss�de cet identifiant");
         } else {

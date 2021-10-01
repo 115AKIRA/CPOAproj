@@ -236,7 +236,9 @@ public class Client {
                 Connexion c = new Connexion();
                 Connection laConnexion = c.creeConnexion();
                 PreparedStatement requete = 
-                        
+                 
+                	
+                		
                 laConnexion.prepareStatement("update Client set nom =?, prenom =?, no_rue =?, voie =?, code_postal=?, ville=?, pays=? where id_client =?");
                 requete.setString(1, nom);
                 requete.setString(2, prenom);
