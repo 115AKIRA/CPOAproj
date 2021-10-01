@@ -43,8 +43,15 @@ public class MySQLRevueDAO implements RevueDAO {
 			Connection laConnexion = c.creeConnexion();
 			PreparedStatement requete = 
 			
-			laConnexion.prepareStatement("insert into Revue (titre) values(?)", Statement.RETURN_GENERATED_KEYS);
+			laConnexion.prepareStatement("insert into Revue (id_revue,titre, description, tarif_numero, visuel, id_periodicite) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, objet.getTitre());
+			requete.setString(2, objet.getTitre());
+			requete.setString(3, objet.getDescription());
+			requete.setFloat(4, objet.getTarif_numero());
+			requete.setString(5, objet.getVisuel());
+			requete.setInt(6, objet.getId_periodicite());
+			
+			
 			
 			nbLigne = requete.executeUpdate();
 			
@@ -70,9 +77,14 @@ public class MySQLRevueDAO implements RevueDAO {
 			Connection laConnexion = c.creeConnexion();
 			PreparedStatement requete = 
 			
-			laConnexion.prepareStatement("update Revue set Titre =? where id_revue =?");
+					
+			laConnexion.prepareStatement("insert into Revue (id_revue,titre, description, tarif_numero, visuel, id_periodicite) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			requete.setString(1, objet.getTitre());
-			requete.setInt(2, objet.getId_revue());
+			requete.setString(2, objet.getTitre());
+			requete.setString(3, objet.getDescription());
+			requete.setFloat(4, objet.getTarif_numero());
+			requete.setString(5, objet.getVisuel());
+			requete.setInt(6, objet.getId_periodicite());
 			
 			nbLigne = requete.executeUpdate();
 			
@@ -94,7 +106,7 @@ public class MySQLRevueDAO implements RevueDAO {
 			PreparedStatement requete = 
 			
 			laConnexion.prepareStatement("delete from Revue where id_revue=?");
-			requete.setInt(1, objet.getId_periodicite());
+			requete.setInt(1, objet.getId_revue());
 			
 			nbLigne = requete.executeUpdate();
 			
