@@ -96,13 +96,13 @@ public class MySQLClientDAO implements ClientDAO{
     }
 
 	@Override
-	public List<Client> getByNomPrenom(String nom, String prenom) throws Exception {
+	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws Exception {
 		int nomx = this.donnees.indexOf(new Client(0, nom, "test", "test", "test", "test", "test", "test"));
 		int prenomx = this.donnees.indexOf(new Client(0, "test", prenom, "test", "test", "test", "test", "test"));
         if ( (nomx == -1) || (prenomx == -1) ){
             throw new IllegalArgumentException("Aucun objet ne poss�de ces identifiants");
         } else {
-            return (List<Client>) this.donnees;
+            return (ArrayList<Client>) this.donnees;
         }
 	}
 }
