@@ -34,11 +34,11 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 	@Override
 	public boolean create(Periodicite objet) {
 
-		objet.setId(3);
+		objet.setId_periodicite(3);
 		// Ne fonctionne que si l'objet métier est bien fait...
 		while (this.donnees.contains(objet)) {
 
-			objet.setId(objet.getId() + 1);
+			objet.setId_periodicite(objet.getId_periodicite() + 1);
 		}
 		boolean ok = this.donnees.add(objet);
 		
