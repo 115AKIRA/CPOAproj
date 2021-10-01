@@ -69,14 +69,9 @@ public class Abonnement {
 	}
 
 
-
-
-
 	public void setId_client(int id_client) {
 		this.id_client = id_client;
 	}
-
-
 
 
 
@@ -237,7 +232,7 @@ public class Abonnement {
 					}
 			}
 			
-			//Modifier Revue
+			//Modifier Abonnement
 
 			public void AbonnemModif(int id_abonnement, CharSequence date_debut, CharSequence date_fin, int id_client, int id_revue) {
 				try {
