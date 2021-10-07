@@ -10,4 +10,19 @@ public class ListeMemoireDAOFactory extends DAOFactory {
 		return ListeMemoirePeriodiciteDAO.getInstance();
 	}
 
+	@Override
+	public RevueDAO getRevueDAO() {
+		return ListeMemoireRevueDAO.getInstance();
+	}
+
+	@Override
+	public ClientDAO getClientDAO() {
+		return ListeMemoireClientDAO.getInstance();
+	}
+
+	@Override
+	public AbonnementDAO getAbonnementDAO() {
+		return ListeMemoireAbonnementDAO.getInstance();
+	}
+
 }

@@ -10,6 +10,21 @@ public class MySQLDAOFactory extends DAOFactory {
 		return MySQLPeriodiciteDAO.getInstance();
 	}
 
+	@Override
+	public RevueDAO getRevueDAO() {
+		return MySQLRevueDAO.getInstance();
+	}
+
+	@Override
+	public ClientDAO getClientDAO() {
+		return MySQLClientDAO.getInstance();
+	}
+
+	@Override
+	public AbonnementDAO getAbonnementDAO() {
+		return MySQLAbonnementDAO.getInstance();
+	}
+
 }
 
 
