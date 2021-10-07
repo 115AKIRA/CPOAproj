@@ -22,9 +22,6 @@ public class Menu {
 		 * a.AbonnemSuppr(1);
 		 */
 	
-	MySQLDAOFactory Sql = new MySQLDAOFactory();
-	ListeMemoireDAOFactory Listememoire = new ListeMemoireDAOFactory();
-	
 	System.out.println("Veuillez chosir votre type de sauvegarde : 1) Liste memoire ; 2) MySQL");
 	
 	int choix = entree.nextInt();
@@ -34,9 +31,10 @@ public class Menu {
 			DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE);
 		case(2):
 			DAOFactory.getDAOFactory(Persistance.MYSQL);
-	}
+		}
 	
 	
+		entree.close();
 		
 	}
 
