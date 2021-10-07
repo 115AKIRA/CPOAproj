@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import connexion.Connexion;
 import dao.AbonnementDAO;
 import modele.Abonnement;
-import modele.Periodicite;
 
 
 public class MySQLAbonnementDAO implements AbonnementDAO{
@@ -37,8 +36,9 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 				PreparedStatement requete = 
 				
 				laConnexion.prepareStatement("insert into Abonnement (date_debut, date_fin, id_client, id_revue) values(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-				requete.setString(1, (String) objet.getDate_debut());
-				requete.setString(2, (String) objet.getDate_fin());
+				DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				requete.setDate(1, Date.valueOf(formatage.format(objet.getDate_debut())));
+				requete.setDate(1, Date.valueOf(formatage.format(objet.getDate_fin())));
 				requete.setInt(3, objet.getId_client());
 				requete.setInt(4, objet.getId_revue());
 				
@@ -122,10 +122,9 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 
 			if (resultSet.next()) {
 				a = new Abonnement();
-				DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				a.setId_abonnement(resultSet.getInt("id_abonnement"));
-				a.setDate_debut(Date.valueOf(formatage.format(resultSet.getDate("date_deb"))));
-				a.setDate_fin(resultSet.getDate("date_fin"));
+				a.setDate_debut((resultSet.getDate("date_debut")).toLocalDate());
+				a.setDate_fin((resultSet.getDate("date_fin")).toLocalDate());
 				a.setId_client(resultSet.getInt("id_client"));
 				a.setId_revue(resultSet.getInt("id_revue"));
 			}
@@ -153,16 +152,17 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 
 			while(resultSet.next()) {
 				aList.add(new Abonnement(resultSet.getInt("id_abonnement"),
-						resultSet.getString("date_debut"),
-						resultSet.getString("date_fin"),
-						));
+						(resultSet.getDate("date_debut").toLocalDate()),
+						(resultSet.getDate("date_fin").toLocalDate()),
+						resultSet.getInt("id_client"),
+						resultSet.getInt("id_revue")));
 			}
 				
 		} catch (SQLException sqle) {
 				System.out.println("Pb dans select " + sqle.getMessage());
 				}
 			
-			return pList;
+			return aList;
 		}
 }
 	   
