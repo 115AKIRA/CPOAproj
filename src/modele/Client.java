@@ -1,6 +1,7 @@
 package modele;
 
 import java.sql.*;
+import java.util.StringTokenizer;
 
 import connexion.Connexion;
 
@@ -86,7 +87,69 @@ public class Client {
 	}
 
 	public void setVille(String ville) {
-		this.ville = ville;
+		
+		if ( ville == null || ville.trim().length() == 0 || ville.matches("[0-9]+") ) {
+			throw new IllegalArgumentException("Ville vide interdit !");
+		}
+		
+		StringTokenizer st = new StringTokenizer((ville.trim().toLowerCase()).replace('-', ' '));
+		ville = "";
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+			switch(token) {
+				case("les"):
+					token = "-lès-";
+					break;
+				case("a"):
+					token = "-à-";
+					break;
+				case("st"):
+					token = "-Saint-";
+					break;
+				case("ste"):
+					token = "-Sainte-";
+					break;
+				case("aux"):
+					token = "-aux-";
+					break;
+				case("le"):
+					token = "-le-";
+					break;
+				case("sous"):
+					token = "-sous-";
+					break;
+				case("sur"):
+					token = "-sur-";
+					break;
+				default:
+					token = (token.substring(0,1).toUpperCase() + token.substring(1));
+					
+					// if ( token.replace(è,e)) = les || (token.replace(à,a)) = a ...
+					// if token = st || token = saint
+						// if token.contains(e)
+							
+			}
+			
+			ville = ville + token + ' ';
+		
+	     }
+		
+		
+		if (ville.contains("-")) {
+			ville = ville.replace(" ","");
+			
+			if ( ville.charAt(0) == '-') {
+				ville = ville.substring(1);
+			}
+		
+			if ( ville.charAt((ville.length()) - 1) == '-') {
+				ville = ville.substring((ville.length() - 1), ville.length());
+			
+			}
+		}
+		
+		this.ville = ((ville.substring(0,1).toUpperCase() + ville.substring(1)).trim());
+		System.out.println(this.ville);
 	}
 
 	public String getPays() {
@@ -94,7 +157,27 @@ public class Client {
 	}
 
 	public void setPays(String pays) {
-		this.pays = pays;
+		
+		if ( pays == null || pays.trim().length()==0 ) {
+			throw new IllegalArgumentException("Pays vide interdit !");
+		}
+		switch((pays.trim()).toLowerCase()) {
+			case("luxembourg"):
+			case("letzebuerg"):
+				this.pays = ("Luxembourg");
+				break;
+			case("belgique"):
+			case("belgium"):
+				this.pays = ("Belgique");
+				break;
+			case("suisse"):
+			case("switzerland"):
+			case("schweiz"):
+				this.pays = ("Suisse");
+				break;
+			default:
+				throw new IllegalArgumentException("Pays non reconnu !");
+		}
 	}
 
 	@Override
