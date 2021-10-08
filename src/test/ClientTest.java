@@ -133,6 +133,21 @@ class ClientTest {
 		}
 	}
 	
+	// Diagnostique Ville : Tout OK !
+	
+	public void codepostaleTest(String code_postal) {
+        
+	    int stringLength = code_postal.length();
+	            
+	    code_postal = code_postal.replaceAll("[^\\d.]", "");
+	    code_postal = code_postal.replaceAll("-", "");
+	    
+	    while (stringLength < 5 ) {
+	        code_postal =( "0"+ code_postal);
+	    }
+	    
+	}
+	
 	
 
 }
