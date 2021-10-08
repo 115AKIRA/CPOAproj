@@ -1,3 +1,4 @@
+
 package modele;
 
 import java.sql.*;
@@ -98,10 +99,10 @@ public class Client {
 			String token = st.nextToken();
 			switch(token) {
 				case("les"):
-					token = "-lès-";
+					token = "-lï¿½s-";
 					break;
 				case("a"):
-					token = "-à-";
+					token = "-ï¿½-";
 					break;
 				case("st"):
 					token = "-Saint-";
@@ -124,7 +125,7 @@ public class Client {
 				default:
 					token = (token.substring(0,1).toUpperCase() + token.substring(1));
 					
-					// if ( token.replace(è,e)) = les || (token.replace(à,a)) = a ...
+					// if ( token.replace(ï¿½,e)) = les || (token.replace(ï¿½,a)) = a ...
 					// if token = st || token = saint
 						// if token.contains(e)
 							
@@ -158,9 +159,7 @@ public class Client {
 
 	public void setPays(String pays) {
 		
-		if ( pays == null || pays.trim().length()==0 ) {
-			throw new IllegalArgumentException("Pays vide interdit !");
-		}
+	
 		switch((pays.trim()).toLowerCase()) {
 			case("luxembourg"):
 			case("letzebuerg"):
@@ -179,6 +178,25 @@ public class Client {
 				throw new IllegalArgumentException("Pays non reconnu !");
 		}
 	}
+	
+	public void nomvoieTest(String Voie) {
+		if ( pays == null || voie.trim().length()==0 ) {
+			throw new IllegalArgumentException("voie vide interdite !");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public int hashCode() {
