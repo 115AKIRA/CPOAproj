@@ -107,7 +107,6 @@ public class Client {
 		}
 		
 		this.voie = voie;
-		System.out.println(voie);
 		
 	}
 

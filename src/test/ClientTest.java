@@ -8,7 +8,7 @@ import modele.Client;
 
 class ClientTest {
 
-	@Test
+/*	@Test
 	public void testPaysSuisseOK() {
 		try {
 			Client c = new Client();
@@ -132,22 +132,65 @@ class ClientTest {
 			fail("Exception lancée par erreur !");
 		}
 	}
-	
+*/	
 	 //Diagnostique Ville : Tout OK !
 	
 	
-	public void codepostaleTest(String code_postal) {
-       
-	    int stringLength = code_postal.length();
-	            
-	    code_postal = code_postal.replaceAll("[^\\d.]", "");
-	    code_postal = code_postal.replaceAll("-", "");
-	    
-	    while (stringLength < 5 ) {
-	        code_postal =( "0"+ code_postal); 
+	@Test
+	public void testVoieNOK() {
+       try {
+	    	Client c = new Client();
+	    	c.setVoie("         ");
+	    	fail("Exception non lancée !");
+	    } catch(IllegalArgumentException iae) {
+	    	//rien
 	    }
-	    
     }
+	
+	@Test
+	public void testVoie1erCharLettreNOK() {
+       try {
+	    	Client c = new Client();
+	    	c.setVoie("b 15 rue des capucins");
+	    	fail("Exception non lancée !");
+	    } catch(IllegalArgumentException iae) {
+	    	//rien
+	    }
+    }
+	
+	@Test
+	public void testVoieAvenueOK() {
+       try {
+	    	Client c = new Client();
+	    	c.setVoie("15 AV. Victor Hugo");
+	    } catch(IllegalArgumentException iae) {
+	    	fail("Exception lancée par erreur !");
+	    }
+    }
+	
+	@Test
+	public void testVoieBoulevardOK() {
+       try {
+	    	Client c = new Client();
+	    	c.setVoie("37 boul du tilleul");
+	    } catch(IllegalArgumentException iae) {
+	    	fail("Exception lancée par erreur !");
+	    }
+    }
+	
+	@Test
+	public void testVoieRueOK() {
+       try {
+	    	Client c = new Client();
+	    	c.setVoie("117 rue du martyr");
+	    } catch(IllegalArgumentException iae) {
+	    	fail("Exception lancée par erreur !");
+	    }
+    }
+	
+	 //Diagnostique Voie : Tout OK !
+	
+	
 	
 	
 
