@@ -107,7 +107,7 @@ class ClientTest {
 	public void testVilleLesOK() {
 		try {
 			Client c = new Client();
-			c.setVille("    st julien les metz     ");
+			c.setVille("    st julien LES metz     ");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -147,6 +147,35 @@ class ClientTest {
 	    }
 	    
 	}*/
+	
+	public void nomvoieTest(String voie) {
+        if ( voie == null || voie.trim().length()==0 ) {
+            throw new IllegalArgumentException("voie vide interdite !");
+        }
+        switch((voie.trim()).toLowerCase()) {
+        case("boul"):
+        case("boul."):
+        case("bd"):
+            voie = ("boulevard");
+            break;
+            case("av."):
+            case("av"):
+                voie = ("avenue");
+                break;
+            case("faub"):
+            case("fg"):
+            case("faub."):
+                voie = ("faubourg");
+                break;
+            case("pl."):
+            case("pl"):
+                voie= ("place");
+
+            default:
+                throw new IllegalArgumentException("Voie non reconnue !");
+
+        }
+    }
 	
 	
 

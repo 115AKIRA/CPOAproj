@@ -72,6 +72,11 @@ public class Client {
 	}
 
 	public void setVoie(String voie) {
+		
+		if ( voie == null || voie.trim().length() == 0 || voie.trim().substring(0,1).matches("[a-zA-Z]")) {
+			throw new IllegalArgumentException("Voie illégale !");
+		}
+		
 		this.voie = voie;
 	}
 
@@ -110,29 +115,21 @@ public class Client {
 						}
 					} else {
 						token = (token.substring(0,1).toUpperCase() + token.substring(1));
-						
 					}
-					
-					ville = ville + token + ' ';
-							
+					ville = ville + token + ' ';			
 			}
-		
-		
 		if (ville.contains("-")) {
 			ville = ville.replace(" ","");
 			
 			if ( ville.charAt(0) == '-') {
 				ville = ville.substring(1);
 			}
-		
 			if ( ville.charAt((ville.length()) - 1) == '-') {
 				ville = ville.substring((ville.length() - 1), ville.length());
-			
 			}
 		}
 		
 		this.ville = ((ville.substring(0,1).toUpperCase() + ville.substring(1)).trim());
-		System.out.println(this.ville);
 	}
 
 	public String getPays() {
@@ -161,25 +158,7 @@ public class Client {
 		}
 	}
 	
-	public void nomvoieTest(String Voie) {
-		if ( pays == null || voie.trim().length()==0 ) {
-			throw new IllegalArgumentException("voie vide interdite !");
-		}
-	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
