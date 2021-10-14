@@ -77,7 +77,38 @@ public class Client {
 			throw new IllegalArgumentException("Voie illégale !");
 		}
 		
+		StringTokenizer st = new StringTokenizer((voie.trim().replaceFirst(" ", ", ")));
+		voie = "";
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken().toLowerCase();
+			
+			switch(token) {
+	        case("boul"):
+	        case("boul."):
+	        case("bd"):
+	            token = ("boulevard");
+	            break;
+	            case("av."):
+	            case("av"):
+	            	token = ("avenue");
+	                break;
+	            case("faub"):
+	            case("fg"):
+	            case("faub."):
+	            	token = ("faubourg");
+	                break;
+	            case("pl."):
+	            case("pl"):
+	            	token = ("place");
+			}
+			
+			voie = voie + token + ' ';
+		
+		}
+		
 		this.voie = voie;
+		System.out.println(voie);
+		
 	}
 
 	public String getCode_postal() {
@@ -85,6 +116,12 @@ public class Client {
 	}
 
 	public void setCode_postal(String code_postal) {
+        
+	    code_postal = code_postal.replaceAll("[a-zA-Z]", "").replaceAll("-", "");
+	    
+	    while (code_postal.length() < 5 ) {
+	        code_postal =( "0"+ code_postal); 
+	    }
 		this.code_postal = code_postal;
 	}
 

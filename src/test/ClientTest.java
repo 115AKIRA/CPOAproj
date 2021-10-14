@@ -8,89 +8,89 @@ import modele.Client;
 
 class ClientTest {
 
-//	@Test
-//	public void testPaysSuisseOK() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("sUISSE");
-//		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
-//		}
-//	}
-//	
-//	@Test
-//	public void testPaysSchweizOK() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("    SchweIZ      ");
-//		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
-//		}
-//	}
-//	
-//	@Test
-//	public void testPaysLetzebuergOK() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("          LETZEbuerg");
-//		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
-//		}
-//	}
-//	
-//	@Test
-//	public void testPaysLuxembourgOK() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("LuxembOURG        ");
-//		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
-//		}
-//	}
-//	
-//	@Test
-//	public void testPaysBelgiumOK() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("                      belgium");
-//		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
-//		}
-//	}
-//	
-//	@Test
-//	public void testPaysBelgiqueOK() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("BELGIQUe");
-//		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
-//		}
-//	}
-//	
-//	@Test
-//	public void testPaysVideNOK() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("                           ");
-//			fail("Exception non lancée !");
-//		} catch ( IllegalArgumentException iae ) {
-//			// rien
-//		}
-//	}
-//	
-//	@Test
-//	public void testPaysAutre() {
-//		try {
-//			Client c = new Client();
-//			c.setPays("france ");
-//			fail("Exception non lancée !");
-//		} catch ( IllegalArgumentException iae ) {
-//			//rien
-//		}
-//	}
+	@Test
+	public void testPaysSuisseOK() {
+		try {
+			Client c = new Client();
+			c.setPays("sUISSE");
+		} catch ( IllegalArgumentException iae ) {
+			fail("Exception lancée par erreur !");
+		}
+	}
 	
-	// Diagnostique Pays : TOUT OK!
+	@Test
+	public void testPaysSchweizOK() {
+		try {
+			Client c = new Client();
+			c.setPays("    SchweIZ      ");
+		} catch ( IllegalArgumentException iae ) {
+			fail("Exception lancée par erreur !");
+		}
+	}
+	
+	@Test
+	public void testPaysLetzebuergOK() {
+		try {
+			Client c = new Client();
+			c.setPays("          LETZEbuerg");
+		} catch ( IllegalArgumentException iae ) {
+			fail("Exception lancée par erreur !");
+		}
+	}
+	
+	@Test
+	public void testPaysLuxembourgOK() {
+		try {
+			Client c = new Client();
+			c.setPays("LuxembOURG        ");
+		} catch ( IllegalArgumentException iae ) {
+			fail("Exception lancée par erreur !");
+		}
+	}
+	
+	@Test
+	public void testPaysBelgiumOK() {
+		try {
+			Client c = new Client();
+			c.setPays("                      belgium");
+		} catch ( IllegalArgumentException iae ) {
+			fail("Exception lancée par erreur !");
+		}
+	}
+	
+	@Test
+	public void testPaysBelgiqueOK() {
+		try {
+			Client c = new Client();
+			c.setPays("BELGIQUe");
+		} catch ( IllegalArgumentException iae ) {
+			fail("Exception lancée par erreur !");
+		}
+	}
+	
+	@Test
+	public void testPaysVideNOK() {
+		try {
+			Client c = new Client();
+			c.setPays("                           ");
+			fail("Exception non lancée !");
+		} catch ( IllegalArgumentException iae ) {
+			 //rien
+		}
+	}
+	
+	@Test
+	public void testPaysAutre() {
+		try {
+			Client c = new Client();
+			c.setPays("france ");
+			fail("Exception non lancée !");
+		} catch ( IllegalArgumentException iae ) {
+			//rien
+		}
+	}
+	
+	 //Diagnostique Pays : TOUT OK!
 	
 	
 	@Test
@@ -133,9 +133,10 @@ class ClientTest {
 		}
 	}
 	
-	// Diagnostique Ville : Tout OK !
+	 //Diagnostique Ville : Tout OK !
 	
-/*	public void codepostaleTest(String code_postal) {
+	
+	public void codepostaleTest(String code_postal) {
        
 	    int stringLength = code_postal.length();
 	            
@@ -146,35 +147,6 @@ class ClientTest {
 	        code_postal =( "0"+ code_postal); 
 	    }
 	    
-	}*/
-	
-	public void nomvoieTest(String voie) {
-        if ( voie == null || voie.trim().length()==0 ) {
-            throw new IllegalArgumentException("voie vide interdite !");
-        }
-        switch((voie.trim()).toLowerCase()) {
-        case("boul"):
-        case("boul."):
-        case("bd"):
-            voie = ("boulevard");
-            break;
-            case("av."):
-            case("av"):
-                voie = ("avenue");
-                break;
-            case("faub"):
-            case("fg"):
-            case("faub."):
-                voie = ("faubourg");
-                break;
-            case("pl."):
-            case("pl"):
-                voie= ("place");
-
-            default:
-                throw new IllegalArgumentException("Voie non reconnue !");
-
-        }
     }
 	
 	
