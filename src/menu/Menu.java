@@ -1,6 +1,6 @@
 package menu;
 
-import modele.*;
+//import modele.*;
 
 import dao.factory.*;
 

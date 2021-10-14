@@ -97,43 +97,25 @@ public class Client {
 		ville = "";
 		while (st.hasMoreTokens()) {
 			String token = st.nextToken();
-			switch(token) {
-				case("les"):
-					token = "-l�s-";
-					break;
-				case("a"):
-					token = "-�-";
-					break;
-				case("st"):
-					token = "-Saint-";
-					break;
-				case("ste"):
-					token = "-Sainte-";
-					break;
-				case("aux"):
-					token = "-aux-";
-					break;
-				case("le"):
-					token = "-le-";
-					break;
-				case("sous"):
-					token = "-sous-";
-					break;
-				case("sur"):
-					token = "-sur-";
-					break;
-				default:
-					token = (token.substring(0,1).toUpperCase() + token.substring(1));
 					
-					// if ( token.replace(�,e)) = les || (token.replace(�,a)) = a ...
-					// if token = st || token = saint
-						// if token.contains(e)
+					if ( token.matches("(?i)aux|le|sous|sur")) {
+						token = ( '-' + token + '-' );
+					} else if ( token.matches("(?i)les|lès|a|à")) {
+						token = ( '-' + (token.replace("a", "à").replace("e", "é")) + '-' );
+					} else if ( token.matches("(?i)st|ste|saint|sainte")) {
+						if ( token.contains("e")) {
+							token = ("-Sainte-");
+						} else {
+							token = ( "-Saint-");
+						}
+					} else {
+						token = (token.substring(0,1).toUpperCase() + token.substring(1));
+						
+					}
+					
+					ville = ville + token + ' ';
 							
 			}
-			
-			ville = ville + token + ' ';
-		
-	     }
 		
 		
 		if (ville.contains("-")) {

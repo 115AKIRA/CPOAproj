@@ -14,7 +14,7 @@ class ClientTest {
 //			Client c = new Client();
 //			c.setPays("sUISSE");
 //		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
+//			fail("Exception lancÃ©e par erreur !");
 //		}
 //	}
 //	
@@ -24,7 +24,7 @@ class ClientTest {
 //			Client c = new Client();
 //			c.setPays("    SchweIZ      ");
 //		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
+//			fail("Exception lancÃ©e par erreur !");
 //		}
 //	}
 //	
@@ -34,7 +34,7 @@ class ClientTest {
 //			Client c = new Client();
 //			c.setPays("          LETZEbuerg");
 //		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
+//			fail("Exception lancÃ©e par erreur !");
 //		}
 //	}
 //	
@@ -44,7 +44,7 @@ class ClientTest {
 //			Client c = new Client();
 //			c.setPays("LuxembOURG        ");
 //		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
+//			fail("Exception lancÃ©e par erreur !");
 //		}
 //	}
 //	
@@ -54,7 +54,7 @@ class ClientTest {
 //			Client c = new Client();
 //			c.setPays("                      belgium");
 //		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
+//			fail("Exception lancÃ©e par erreur !");
 //		}
 //	}
 //	
@@ -64,7 +64,7 @@ class ClientTest {
 //			Client c = new Client();
 //			c.setPays("BELGIQUe");
 //		} catch ( IllegalArgumentException iae ) {
-//			fail("Exception lancée par erreur !");
+//			fail("Exception lancÃ©e par erreur !");
 //		}
 //	}
 //	
@@ -73,7 +73,7 @@ class ClientTest {
 //		try {
 //			Client c = new Client();
 //			c.setPays("                           ");
-//			fail("Exception non lancée !");
+//			fail("Exception non lancÃ©e !");
 //		} catch ( IllegalArgumentException iae ) {
 //			// rien
 //		}
@@ -84,7 +84,7 @@ class ClientTest {
 //		try {
 //			Client c = new Client();
 //			c.setPays("france ");
-//			fail("Exception non lancée !");
+//			fail("Exception non lancÃ©e !");
 //		} catch ( IllegalArgumentException iae ) {
 //			//rien
 //		}
@@ -99,7 +99,7 @@ class ClientTest {
 			Client c = new Client();
 			c.setVille("mETZ    ");
 		} catch ( IllegalArgumentException iae ) {
-			fail("Exception lancée par erreur !");
+			fail("Exception lancÃ©e par erreur !");
 		}
 	}
 	
@@ -109,7 +109,7 @@ class ClientTest {
 			Client c = new Client();
 			c.setVille("    st julien les metz     ");
 		} catch ( IllegalArgumentException iae ) {
-			fail("Exception lancée par erreur !");
+			fail("Exception lancÃ©e par erreur !");
 		}
 	}
 	
@@ -119,7 +119,7 @@ class ClientTest {
 			Client c = new Client();
 			c.setVille("    los angeles    ");
 		} catch ( IllegalArgumentException iae ) {
-			fail("Exception lancée par erreur !");
+			fail("Exception lancÃ©e par erreur !");
 		}
 	}
 	
@@ -129,24 +129,24 @@ class ClientTest {
 			Client c = new Client();
 			c.setVille("la grange    ");
 		} catch ( IllegalArgumentException iae ) {
-			fail("Exception lancée par erreur !");
+			fail("Exception lancÃ©e par erreur !");
 		}
 	}
 	
 	// Diagnostique Ville : Tout OK !
 	
-	public void codepostaleTest(String code_postal) {
-        
+/*	public void codepostaleTest(String code_postal) {
+       
 	    int stringLength = code_postal.length();
 	            
 	    code_postal = code_postal.replaceAll("[^\\d.]", "");
 	    code_postal = code_postal.replaceAll("-", "");
 	    
 	    while (stringLength < 5 ) {
-	        code_postal =( "0"+ code_postal);
+	        code_postal =( "0"+ code_postal); 
 	    }
 	    
-	}
+	}*/
 	
 	
 
