@@ -115,6 +115,10 @@ public class Client {
 	}
 
 	public void setCode_postal(String code_postal) {
+		
+		if ( code_postal == null || code_postal.trim().length() == 0 || code_postal.matches("[a-zA-Z]+") ) {
+			throw new IllegalArgumentException("Code postal illegal !");
+		}
         
 	    code_postal = code_postal.replaceAll("[a-zA-Z]", "").replaceAll("-", "");
 	    

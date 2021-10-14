@@ -2,17 +2,25 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import modele.Client;
 
 class ClientTest {
+	
+	private Client c;
+	
+	@BeforeEach
+	public void setUp() {
+		this.c = new Client();
+	}
 
-/*	@Test
+	@Test
 	public void testPaysSuisseOK() {
 		try {
-			Client c = new Client();
-			c.setPays("sUISSE");
+			
+			this.c.setPays("sUISSE");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -21,8 +29,8 @@ class ClientTest {
 	@Test
 	public void testPaysSchweizOK() {
 		try {
-			Client c = new Client();
-			c.setPays("    SchweIZ      ");
+			
+			this.c.setPays("    SchweIZ      ");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -31,8 +39,8 @@ class ClientTest {
 	@Test
 	public void testPaysLetzebuergOK() {
 		try {
-			Client c = new Client();
-			c.setPays("          LETZEbuerg");
+			
+			this.c.setPays("          LETZEbuerg");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -41,8 +49,8 @@ class ClientTest {
 	@Test
 	public void testPaysLuxembourgOK() {
 		try {
-			Client c = new Client();
-			c.setPays("LuxembOURG        ");
+			
+			this.c.setPays("LuxembOURG        ");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -51,8 +59,8 @@ class ClientTest {
 	@Test
 	public void testPaysBelgiumOK() {
 		try {
-			Client c = new Client();
-			c.setPays("                      belgium");
+			
+			this.c.setPays("                      belgium");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -61,8 +69,8 @@ class ClientTest {
 	@Test
 	public void testPaysBelgiqueOK() {
 		try {
-			Client c = new Client();
-			c.setPays("BELGIQUe");
+			
+			this.c.setPays("BELGIQUe");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -71,8 +79,8 @@ class ClientTest {
 	@Test
 	public void testPaysVideNOK() {
 		try {
-			Client c = new Client();
-			c.setPays("                           ");
+			
+			this.c.setPays("                           ");
 			fail("Exception non lancée !");
 		} catch ( IllegalArgumentException iae ) {
 			 //rien
@@ -82,8 +90,8 @@ class ClientTest {
 	@Test
 	public void testPaysAutre() {
 		try {
-			Client c = new Client();
-			c.setPays("france ");
+			
+			this.c.setPays("france ");
 			fail("Exception non lancée !");
 		} catch ( IllegalArgumentException iae ) {
 			//rien
@@ -96,8 +104,8 @@ class ClientTest {
 	@Test
 	public void testVilleSimpleOK() {
 		try {
-			Client c = new Client();
-			c.setVille("mETZ    ");
+			
+			this.c.setVille("mETZ    ");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -106,8 +114,8 @@ class ClientTest {
 	@Test
 	public void testVilleLesOK() {
 		try {
-			Client c = new Client();
-			c.setVille("    st julien LES metz     ");
+			
+			this.c.setVille("    st julien LES metz     ");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -116,8 +124,8 @@ class ClientTest {
 	@Test
 	public void testVilleEspacesOK() {
 		try {
-			Client c = new Client();
-			c.setVille("    los angeles    ");
+			
+			this.c.setVille("    los angeles    ");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
@@ -126,21 +134,21 @@ class ClientTest {
 	@Test
 	public void testVilleLeDebutOK() {
 		try {
-			Client c = new Client();
-			c.setVille("la grange    ");
+			
+			this.c.setVille("la grange    ");
 		} catch ( IllegalArgumentException iae ) {
 			fail("Exception lancée par erreur !");
 		}
 	}
-*/	
+		
 	 //Diagnostique Ville : Tout OK !
 	
 	
 	@Test
 	public void testVoieNOK() {
        try {
-	    	Client c = new Client();
-	    	c.setVoie("         ");
+	    	
+	    	this.c.setVoie("         ");
 	    	fail("Exception non lancée !");
 	    } catch(IllegalArgumentException iae) {
 	    	//rien
@@ -150,8 +158,8 @@ class ClientTest {
 	@Test
 	public void testVoie1erCharLettreNOK() {
        try {
-	    	Client c = new Client();
-	    	c.setVoie("b 15 rue des capucins");
+	    	
+	    	this.c.setVoie("b 15 rue des capucins");
 	    	fail("Exception non lancée !");
 	    } catch(IllegalArgumentException iae) {
 	    	//rien
@@ -161,8 +169,8 @@ class ClientTest {
 	@Test
 	public void testVoieAvenueOK() {
        try {
-	    	Client c = new Client();
-	    	c.setVoie("15 AV. Victor Hugo");
+	    	
+	    	this.c.setVoie("15 AV. Victor Hugo");
 	    } catch(IllegalArgumentException iae) {
 	    	fail("Exception lancée par erreur !");
 	    }
@@ -171,8 +179,8 @@ class ClientTest {
 	@Test
 	public void testVoieBoulevardOK() {
        try {
-	    	Client c = new Client();
-	    	c.setVoie("37 boul du tilleul");
+	    	
+	    	this.c.setVoie("37 boul du tilleul");
 	    } catch(IllegalArgumentException iae) {
 	    	fail("Exception lancée par erreur !");
 	    }
@@ -181,17 +189,57 @@ class ClientTest {
 	@Test
 	public void testVoieRueOK() {
        try {
-	    	Client c = new Client();
-	    	c.setVoie("117 rue du martyr");
+	    	
+	    	this.c.setVoie("117 rue du martyr");
 	    } catch(IllegalArgumentException iae) {
 	    	fail("Exception lancée par erreur !");
 	    }
     }
-	
+    
 	 //Diagnostique Voie : Tout OK !
 	
+	@Test
+    public void testCodePostal1OK() {
+        try {
+            
+            this.c.setCode_postal("57000");
+        } catch ( IllegalArgumentException iae ) {
+        	fail("Exception anormale!");
+        }
+    }
 	
+	@Test
+	public void testCodePostal2OK() {
+        try {
+            
+            this.c.setCode_postal("L-50");
+        } catch ( IllegalArgumentException iae ) {
+        	fail("Exception anormale !");
+        }
+    }
 	
+	@Test
+	public void testCodePostal3NOK() {
+        try {
+            
+            this.c.setCode_postal("abc");
+            fail("Exception non lancée !");
+        } catch ( IllegalArgumentException iae ) {
+
+        }
+    }
 	
+	@Test
+	public void testCodePostal4NOK() {
+        try {
+            
+            this.c.setCode_postal("");
+            fail("Exception non lancée !");
+        } catch ( IllegalArgumentException iae ) {
+
+        }
+    }
+	
+	//Diagnostique Code Postal : Tout OK !
 
 }
