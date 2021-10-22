@@ -96,8 +96,7 @@ public class MenuClient {
 			break;
 	}
 		} catch(NumberFormatException iae) {
-			System.out.println("Veuillez faire un choix valide.");
-			main(args);
+			
 		}
 		
 	
