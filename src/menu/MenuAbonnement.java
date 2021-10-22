@@ -51,7 +51,7 @@ private static DAOFactory DAO = null;
 		}
 	}
 	
-	public static LocalDate creerDate() throws Exception {
+	public static LocalDate creerDate(String[] args) throws Exception {
 		
 		LocalDate d = null;
 		
@@ -71,7 +71,7 @@ private static DAOFactory DAO = null;
 		} catch ( DateTimeException iae ) {
 			System.out.println("Date incorrecte");
 			System.out.println("Retour au menu :");
-			main(null);
+			main(args);
 		}
 		
 		return d;
@@ -99,9 +99,9 @@ private static DAOFactory DAO = null;
 		
 		case(1) :
 			System.out.println("Veuillez saisir la date de debut: ");
-			dateDebut = creerDate();
+			dateDebut = creerDate(args);
 			System.out.println("Veuillez saisir la date de fin : ");
-			dateFin = creerDate();
+			dateFin = creerDate(args);
 			System.out.println("Veuillez saisir l'id de periodicite : ");
 			idRevue = entree.nextInt();
 			System.out.println("Veuillez saisir l'id du client : ");
