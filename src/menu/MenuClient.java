@@ -2,22 +2,24 @@ package menu;
 
 import java.util.Scanner;
 
+import com.sun.tools.javac.Main;
+
 import dao.Persistance;
 import dao.factory.DAOFactory;
 import modele.Client;
 
 public class MenuClient {
 	
-	public static DAOFactory DAO = null;
+	private static DAOFactory DAO = null;
 	
-	private int idClient;
-	private String nom;
-	private String prenom;
-	private String noRue ;
-	private String voie ;
-	private String codePostal ;
-	private String ville ;
-	private String pays ; 
+	private static int idClient;
+	private static String nom;
+	private static String prenom;
+	private static String noRue ;
+	private static String voie ;
+	private static String codePostal ;
+	private static String ville ;
+	private static String pays ; 
 	
 	public static void choixPersistance() {
 		
@@ -44,12 +46,13 @@ public class MenuClient {
 		
 	} catch(NumberFormatException iae) {
 		System.out.println("Veuillez faire un choix valide.");
+		entree.close();
 		choixPersistance();
 		
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		Scanner entree = new Scanner(System.in);
 			
@@ -69,34 +72,62 @@ public class MenuClient {
 		
 		case(1) :
 			System.out.println("Veuillez saisir le nom : ");
-			String nom = entree.next();
+			nom = entree.next();
 			System.out.println("Veuillez saisir le prenom : ");
-			String prenom = entree.next();
+			prenom = entree.next();
 			System.out.println("Veuillez saisir le nom de rue : ");
-			String rue = entree.next();
+			noRue = entree.next();
 			System.out.println("Veuillez saisir la voie : ");
-			String voie = entree.next();
+			voie = entree.next();
 			System.out.println("Veuillez saisir le code postal : ");
-			String code = entree.next();
+			codePostal = entree.next();
 			System.out.println("Veuillez saisir la ville : ");
-			String ville = entree.next();
+			ville = entree.next();
 			System.out.println("Veuillez saisir le pays : ");
-			String pays = entree.next();
+			pays = entree.next();
 			
-			Client c = new Client(nom, prenom, rue, voie, code, ville, pays);
+			Client c = new Client(nom, prenom, noRue, voie, codePostal, ville, pays);
 			DAO.getClientDAO().create(c);
 			
 			break;
 		case(2) :
-			DAO = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE);
+			System.out.println("Veuillez saisir l'id du client : ");
+			idClient = entree.nextInt();
+			System.out.println("Veuillez saisir le nom : ");
+			nom = entree.next();
+			System.out.println("Veuillez saisir le prenom : ");
+			prenom = entree.next();
+			System.out.println("Veuillez saisir le nom de rue : ");
+			noRue = entree.next();
+			System.out.println("Veuillez saisir la voie : ");
+			voie = entree.next();
+			System.out.println("Veuillez saisir le code postal : ");
+			codePostal = entree.next();
+			System.out.println("Veuillez saisir la ville : ");
+			ville = entree.next();
+			System.out.println("Veuillez saisir le pays : ");
+			pays = entree.next();
+		
+			Client u = new Client(idClient, nom, prenom, noRue, voie, codePostal, ville, pays);
+			DAO.getClientDAO().update(u);
 			break;
 		case(3) :
+			System.out.println("Veuillez saisir l'id du client : ");
+			idClient = entree.nextInt();
+			
+			Client d = new Client(idClient);
+		
+			DAO.getClientDAO().delete(d);
 			break;
 		case(4) :
+			Main.main(args);
 			break;
 	}
+		entree.close();
+		
 		} catch(NumberFormatException iae) {
-			
+			System.out.println("Veuillez faire un choix valide.");
+			main(args);
 		}
 		
 	

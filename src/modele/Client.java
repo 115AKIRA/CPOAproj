@@ -43,7 +43,12 @@ public class Client {
 	}
 
 	 
-    public int getIdClient() {
+    public Client(int idClient) {
+    	super();
+    	this.idClient = idClient;
+	}
+
+	public int getIdClient() {
 		return idClient;
 	}
 

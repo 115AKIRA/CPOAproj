@@ -18,6 +18,11 @@ public class Periodicite {
 		this.libelle = libelle;
 	}
 
+	public Periodicite(int idPeriodicite) {
+		super();
+		this.idPeriodicite = idPeriodicite;
+	}
+
 	public int getIdPeriodicite() {
 		return idPeriodicite;
 	}

@@ -30,6 +30,11 @@ public class Revue {
 
 	public Revue() {}
 
+	public Revue(int idRevue) {
+		super();
+		this.idRevue = idRevue;
+	}
+
 	public int getIdRevue() {
 		return idRevue;
 	}

@@ -2,7 +2,6 @@ package modele;
 
 import java.time.*;
 
-
 public class Abonnement {
 
 	private int idClient;
@@ -30,6 +29,11 @@ public class Abonnement {
 
 	public Abonnement() {}
 
+	public Abonnement(int idAbonnement) {
+		super();
+		this.idAbonnement = idAbonnement;
+	}
+
 	public int getIdAbonnement() {
 		return idAbonnement;
 	}
@@ -52,7 +56,7 @@ public class Abonnement {
 		return dateDebut;
 	}
 
-	public void setDateDebut(LocalDate dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) throws DateTimeException {
 		// pas de verification : on considère que l'on peut ajouter une date supérieure à la date courante, mais pour la date fin...
 		this.dateDebut = dateDebut;
 	}
@@ -61,7 +65,7 @@ public class Abonnement {
 		return dateFin;
 	}
 
-	public void setDateFin(LocalDate dateFin) {
+	public void setDateFin(LocalDate dateFin) throws DateTimeException {
 		if ( dateFin.isBefore(this.dateDebut) || (this.dateDebut == null )) {
 			System.out.println("Erreur ! Date de fin invalide !");
 		}

@@ -1,16 +1,10 @@
 package menu;
 
-//import modele.*;
-
-import dao.factory.*;
 import java.util.*;
 
-import dao.*;
-
 public class Menu {
-	
-	@SuppressWarnings("unused")
-	public static void main (String[] args) {
+
+	public static void main (String[] args) throws Exception {
 		
 		Scanner entree = new Scanner(System.in);
 	
@@ -36,27 +30,25 @@ public class Menu {
 	try {
 		switch (choix) {
 			case(1):
-				
+				MenuAbonnement.main(args);
+				break;
 			case(2):
 				MenuClient.main(args);
+				break;
 			case(3):
-				
+				MenuPeriodicite.main(args);
+				break;
 			case(4):
-				
+				MenuRevue.main(args);
+				break;
 			case(5):
+				System.exit(0);
 				
 			}
 		} catch(NumberFormatException iae ) {
 			System.out.println("Veuillez faire un choix valide.");
 			main(args);
-		
 	}
-	
-	
-		entree.close();
-		
+		entree.close();	
 	}
-
-	
-
 }
