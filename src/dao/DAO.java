@@ -8,6 +8,6 @@ public interface DAO<T> {
 	public abstract boolean create(T objet) throws Exception;
 	public abstract boolean update(T objet) throws Exception;
 	public abstract boolean delete(T objet) throws Exception;
-	public abstract ArrayList<T> findAll ();
+	public abstract ArrayList<T> findAll () throws Exception;
 
 }

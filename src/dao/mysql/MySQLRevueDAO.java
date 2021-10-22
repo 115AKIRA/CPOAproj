@@ -1,12 +1,10 @@
 package dao.mysql;
 
-
 import java.util.ArrayList;
 
 
 import java.sql.*;
 
-import connexion.Connexion;
 import dao.RevueDAO;
 
 import modele.Revue ;
@@ -15,9 +13,6 @@ import modele.Revue ;
 public class MySQLRevueDAO implements RevueDAO {
 
 	private static MySQLRevueDAO instance;
-
-	
-
 
 	public static MySQLRevueDAO getInstance() {
 
@@ -28,151 +23,119 @@ public class MySQLRevueDAO implements RevueDAO {
 		return instance;
 	}
 
-	private MySQLRevueDAO() {}
-	
-	
-	
-
+	private MySQLRevueDAO() {}	
+		
 	@Override
-	public boolean create(Revue objet) {
+	public boolean create(Revue objet) throws SQLException {
 		
 		int nbLigne = 0; 
 		
-		try {
-			Connexion c = new Connexion();
-			Connection laConnexion = c.creeConnexion();
-			PreparedStatement requete = 
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = 
 			
-			laConnexion.prepareStatement("insert into Revue (id_revue,titre, description, tarif_numero, visuel, id_periodicite) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			requete.setString(1, objet.getTitre());
-			requete.setString(2, objet.getTitre());
-			requete.setString(3, objet.getDescription());
-			requete.setFloat(4, objet.getTarif_numero());
-			requete.setString(5, objet.getVisuel());
-			requete.setInt(6, objet.getId_periodicite());
+		laConnexion.prepareStatement("insert into Revue (id_revue,titre, description, tarif_numero, visuel, id_periodicite) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+		requete.setString(1, objet.getTitre());
+		requete.setString(2, objet.getTitre());
+		requete.setString(3, objet.getDescription());
+		requete.setFloat(4, objet.getTarifNumero());
+		requete.setString(5, objet.getVisuel());
+		requete.setInt(6, objet.getIdPeriodicite());
 			
 			
 			
-			nbLigne = requete.executeUpdate();
+		nbLigne = requete.executeUpdate();
 			
-			ResultSet res = requete.getGeneratedKeys();
-			if ( res.next() ) {
-				objet.setId_revue(res.getInt(1));
-			}
-			
-	} catch (SQLException sqle) {
-			System.out.println("Pb dans select " + sqle.getMessage());
-			}
+		ResultSet res = requete.getGeneratedKeys();
+		if ( res.next() ) {
+			objet.setIdRevue(res.getInt(1));
+		}
 		
-		return nbLigne != 0;
+		return nbLigne == 1;
 	}
 
 	@Override
-	public boolean update(Revue objet) {
+	public boolean update(Revue objet) throws SQLException {
 		
 		int nbLigne = 0; 
-		
-		try {
-			Connexion c = new Connexion();
-			Connection laConnexion = c.creeConnexion();
-			PreparedStatement requete = 
+
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = 
 			
 					
-			laConnexion.prepareStatement("insert into Revue (id_revue,titre, description, tarif_numero, visuel, id_periodicite) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			requete.setString(1, objet.getTitre());
-			requete.setString(2, objet.getTitre());
-			requete.setString(3, objet.getDescription());
-			requete.setFloat(4, objet.getTarif_numero());
-			requete.setString(5, objet.getVisuel());
-			requete.setInt(6, objet.getId_periodicite());
+		laConnexion.prepareStatement("update Revue set id_revue=?, titre=?, description=?, tarif_numero=?, visuel=?, id_periodicite=?");
+		requete.setString(1, objet.getTitre());
+		requete.setString(2, objet.getTitre());
+		requete.setString(3, objet.getDescription());
+		requete.setFloat(4, objet.getTarifNumero());
+		requete.setString(5, objet.getVisuel());
+		requete.setInt(6, objet.getIdPeriodicite());
 			
-			nbLigne = requete.executeUpdate();
-			
-	} catch (SQLException sqle) {
-			System.out.println("Pb dans select " + sqle.getMessage());
-			}
+		nbLigne = requete.executeUpdate();
 		
-		return nbLigne != 0;
+		return nbLigne == 1;
 	}
 
 	@Override
-	public boolean delete(Revue objet) {
+	public boolean delete(Revue objet) throws SQLException {
 		
 		int nbLigne = 0; 
 		
-		try {
-			Connexion c = new Connexion();
-			Connection laConnexion = c.creeConnexion();
-			PreparedStatement requete = 
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = 
 			
-			laConnexion.prepareStatement("delete from Revue where id_revue=?");
-			requete.setInt(1, objet.getId_revue());
+		laConnexion.prepareStatement("delete from Revue where id_revue=?");
+		requete.setInt(1, objet.getIdRevue());
 			
-			nbLigne = requete.executeUpdate();
+		nbLigne = requete.executeUpdate();
 			
-	} catch (SQLException sqle) {
-			System.out.println("Pb dans select " + sqle.getMessage());
-			}
-		
-		return nbLigne != 0;
+		return nbLigne == 1;
 	}
 
 	@Override
-	public Revue getById(int id) {
+	public Revue getById(int id) throws SQLException {
 		
 		Revue r = null;
 		
-		try {
-			Connexion c = new Connexion();
-			Connection laConnexion = c.creeConnexion();
-			PreparedStatement requete = 
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = 
 			
-			laConnexion.prepareStatement("select * from Revue where id_revue=?");
-			requete.setInt(1, id);
+		laConnexion.prepareStatement("select * from Revue where id_revue=?");
+		requete.setInt(1, id);
 			
-			ResultSet resultSet = requete.executeQuery();
+		ResultSet resultSet = requete.executeQuery();
 
 		if (resultSet.next()) {
 			r = new Revue();
-			r.setId_revue(resultSet.getInt("id_revue"));
+			r.setIdRevue(resultSet.getInt("id_revue"));
 			r.setTitre(resultSet.getString("titre"));
 			r.setDescription(resultSet.getString("description"));
-			r.setTarif_numero(resultSet.getFloat("tarif_numero"));
+			r.setTarifNumero(resultSet.getFloat("tarif_numero"));
 			r.setVisuel(resultSet.getString("visuel"));
-			r.setId_periodicite(resultSet.getInt("id_periodicite"));
+			r.setIdPeriodicite(resultSet.getInt("id_periodicite"));
 		}
-			
-	} catch (SQLException sqle) {
-			System.out.println("Pb dans select " + sqle.getMessage());
-			}
 		
 		return r;
 	}
 
 	@Override
-	public ArrayList<Revue> findAll() {
+	public ArrayList<Revue> findAll() throws SQLException {
 		
 		ArrayList<Revue> rList = new ArrayList<Revue>();
-		
-		try {
-			Connexion c = new Connexion();
-			Connection laConnexion = c.creeConnexion();
-			PreparedStatement requete = 
+
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = 
 			
-			laConnexion.prepareStatement("select * from Revue");
+		laConnexion.prepareStatement("select * from Revue");
 			
-			ResultSet resultSet = requete.executeQuery();
+		ResultSet resultSet = requete.executeQuery();
 
 		while(resultSet.next()) {
-			rList.add(new Revue(resultSet.getInt("id_revue")
-					,resultSet.getString("titre"),resultSet.getString("description"),resultSet.getFloat("tarif_numero"),resultSet.getString("visuel"),resultSet.getInt("id_periodicite")));
+			rList.add(new Revue(resultSet.getInt("id_revue"),resultSet.getString("titre"),
+					resultSet.getString("description"),resultSet.getFloat("tarif_numero"),
+					resultSet.getString("visuel"),resultSet.getInt("id_periodicite")));
 		}
-			
-	} catch (SQLException sqle) {
-			System.out.println("Pb dans select " + sqle.getMessage());
-			}
 		
 		return rList;
 		
 	}
-	}
+}

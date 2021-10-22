@@ -36,11 +36,11 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 	    @Override
 	    public boolean create(Abonnement objet) {
 
-	        objet.setId_abonnement(1);
+	        objet.setIdAbonnement(1);
 	        // Ne fonctionne que si l'objet m�tier est bien fait...
 	        while (this.donnees.contains(objet)) {
 
-	            objet.setId_abonnement(objet.getId_abonnement() + 1);
+	            objet.setIdAbonnement(objet.getIdAbonnement() + 1);
 	        }
 	        boolean ok = this.donnees.add(objet);
 	        

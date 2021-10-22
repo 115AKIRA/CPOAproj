@@ -7,7 +7,6 @@ import dao.ClientDAO;
 import modele.Client;
 
 
-
 public class ListeMemoireClientDAO implements ClientDAO {
     
     private static ListeMemoireClientDAO instance;
@@ -25,23 +24,19 @@ public class ListeMemoireClientDAO implements ClientDAO {
     private ListeMemoireClientDAO() {
 
         this.donnees = new ArrayList<Client>();
-
-        
+     
         this.donnees.add(new Client (6,"jean", "pierre", "ronce","voie1","57000","metz","France"));
         this.donnees.add(new Client (5,"jeanne", "pierre", "ronce","voie1","57000","metz","France"));
     }
     
-    
-    
-    
     @Override
     public boolean create(Client objet) {
 
-        objet.setId_client(1);
+        objet.setIdClient(1);
         // Ne fonctionne que si l'objet m�tier est bien fait...
         while (this.donnees.contains(objet)) {
 
-            objet.setId_client(objet.getId_client() + 1);
+            objet.setIdClient(objet.getIdClient() + 1);
         }
         boolean ok = this.donnees.add(objet);
         
@@ -96,8 +91,8 @@ public class ListeMemoireClientDAO implements ClientDAO {
     }
 	@Override
 	public ArrayList<Client> getByNomPrenom(String nom, String prenom) throws Exception {
-		int nomx = this.donnees.indexOf(new Client(0, nom, "test", "test", "test", "test", "test", "test"));
-		int prenomx = this.donnees.indexOf(new Client(0, "test", prenom, "test", "test", "test", "test", "test"));
+		int nomx = this.donnees.indexOf(new Client(nom, "test", "test", "test", "test", "test", "test"));
+		int prenomx = this.donnees.indexOf(new Client("test", prenom, "test", "test", "test", "test", "test"));
         if ( (nomx == -1) || (prenomx == -1) ){
             throw new IllegalArgumentException("Aucun objet ne poss�de ces identifiants");
         } else {

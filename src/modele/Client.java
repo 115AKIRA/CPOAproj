@@ -1,46 +1,54 @@
-
 package modele;
 
-import java.sql.*;
 import java.util.StringTokenizer;
 
-import connexion.Connexion;
 
 public class Client {
 
-	private int id_client;
+	private int idClient;
 	private String nom;
 	private String prenom;
-	private String no_rue ;
+	private String noRue ;
 	private String voie ;
-	private String code_postal ;
+	private String codePostal ;
 	private String ville ;
 	private String pays ;
 
 	
 	public Client() {};
 	
-    public Client(int id_client, String nom, String prenom, String no_rue, String voie, String code_postal,
+    public Client(int idClient, String nom, String prenom, String noRue, String voie, String codePostal,
 			String ville, String pays) {
 		super();
-		this.id_client = id_client;
+		this.idClient = idClient;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.no_rue = no_rue;
+		this.noRue = noRue;
 		this.voie = voie;
-		this.code_postal = code_postal;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.pays = pays;
+	}
+    
+    public Client(String nom, String prenom, String noRue, String voie, String codePostal,
+			String ville, String pays) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.noRue = noRue;
+		this.voie = voie;
+		this.codePostal = codePostal;
 		this.ville = ville;
 		this.pays = pays;
 	}
 
-	
-    
-    public int getId_client() {
-		return id_client;
+	 
+    public int getIdClient() {
+		return idClient;
 	}
 
-	public void setId_client(int id_client) {
-		this.id_client = id_client;
+	public void setIdClient(int idClient) {
+		this.idClient = idClient;
 	}
 
 	public String getNom() {
@@ -48,7 +56,11 @@ public class Client {
 	}
 
 	public void setNom(String nom) {
+		if (nom.matches("[0-9]+")) {
+			System.out.println("Le nom doit comporter uniquement des lettres !");
+		} else {
 		this.nom = nom;
+		}
 	}
 
 	public String getPrenom() {
@@ -59,12 +71,12 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public String getNo_rue() {
-		return no_rue;
+	public String getNoRue() {
+		return noRue;
 	}
 
-	public void setNo_rue(String no_rue) {
-		this.no_rue = no_rue;
+	public void setNoRue(String noRue) {
+		this.noRue = noRue;
 	}
 
 	public String getVoie() {
@@ -110,22 +122,22 @@ public class Client {
 		
 	}
 
-	public String getCode_postal() {
-		return code_postal;
+	public String getCodePostal() {
+		return codePostal;
 	}
 
-	public void setCode_postal(String code_postal) {
+	public void setCodePostal(String codePostal) {
 		
-		if ( code_postal == null || code_postal.trim().length() == 0 || code_postal.matches("[a-zA-Z]+") ) {
+		if ( codePostal == null || codePostal.trim().length() == 0 || codePostal.matches("[a-zA-Z]+") ) {
 			throw new IllegalArgumentException("Code postal illegal !");
 		}
         
-	    code_postal = code_postal.replaceAll("[a-zA-Z]", "").replaceAll("-", "");
+	    codePostal = codePostal.replaceAll("[a-zA-Z]", "").replaceAll("-", "");
 	    
-	    while (code_postal.length() < 5 ) {
-	        code_postal =( "0"+ code_postal); 
+	    while (codePostal.length() < 5 ) {
+	        codePostal =( "0"+ codePostal); 
 	    }
-		this.code_postal = code_postal;
+		this.codePostal = codePostal;
 	}
 
 	public String getVille() {
@@ -177,8 +189,7 @@ public class Client {
 	}
 
 	public void setPays(String pays) {
-		
-	
+
 		switch((pays.trim()).toLowerCase()) {
 			case("luxembourg"):
 			case("letzebuerg"):
@@ -197,169 +208,12 @@ public class Client {
 				throw new IllegalArgumentException("Pays non reconnu !");
 		}
 	}
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((code_postal == null) ? 0 : code_postal.hashCode());
-		result = prime * result + id_client;
-		result = prime * result + ((no_rue == null) ? 0 : no_rue.hashCode());
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + ((pays == null) ? 0 : pays.hashCode());
-		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + ((ville == null) ? 0 : ville.hashCode());
-		result = prime * result + ((voie == null) ? 0 : voie.hashCode());
-		return result;
-	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Client other = (Client) obj;
-		if (code_postal == null) {
-			if (other.code_postal != null)
-				return false;
-		} else if (!code_postal.equals(other.code_postal))
-			return false;
-		if (id_client != other.id_client)
-			return false;
-		if (no_rue == null) {
-			if (other.no_rue != null)
-				return false;
-		} else if (!no_rue.equals(other.no_rue))
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (pays == null) {
-			if (other.pays != null)
-				return false;
-		} else if (!pays.equals(other.pays))
-			return false;
-		if (prenom == null) {
-			if (other.prenom != null)
-				return false;
-		} else if (!prenom.equals(other.prenom))
-			return false;
-		if (ville == null) {
-			if (other.ville != null)
-				return false;
-		} else if (!ville.equals(other.ville))
-			return false;
-		if (voie == null) {
-			if (other.voie != null)
-				return false;
-		} else if (!voie.equals(other.voie))
-			return false;
-		return true;
+	public String toString() {
+		return "Client [idClient=" + idClient + ", nom=" + nom + ", prenom=" + prenom + ", noRue=" + noRue + ", voie="
+				+ voie + ", codePostal=" + codePostal + ", ville=" + ville + ", pays=" + pays + "]";
 	}
-
-	 //A SupprimerClient
 	
-	public void ClientSuppr(int id_client) {
-        try {
-            Connexion c = new Connexion();
-            Connection laConnexion = c.creeConnexion();
-            PreparedStatement requete = 
-            
-            laConnexion.prepareStatement("delete from Client where id_client=?");
-            requete.setInt(1, id_client);
-            int nbLignes = requete.executeUpdate();
-            System.out.println("Update:" + nbLignes);
-
-        if (requete != null)
-            requete.close();
-            
-        if (laConnexion != null)
-            laConnexion.close();
-            
-    } catch (SQLException sqle) {
-            System.out.println("Pb dans select " + sqle.getMessage());
-            }
-    }
-    
-    //Ajout Client
-    
-        public void ClientAjout(String nom, String prenom , String no_rue , String voie , String code_postal , String ville , String pays   ) {
-            try {
-                Connexion c = new Connexion();
-                Connection laConnexion = c.creeConnexion();
-                PreparedStatement requete = 
-                        
-                laConnexion.prepareStatement("insert into Client (nom, prenom, no_rue, voie, code_postal, ville, pays) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-                requete.setString(1, nom);
-                requete.setString(2, prenom);
-                requete.setString(3, no_rue);
-                requete.setString(4, voie);
-                requete.setString(5, code_postal);
-                requete.setString(6, ville);
-                requete.setString(7, pays);
-                int nbLignes = requete.executeUpdate();
-                System.out.println("Update:" + nbLignes);
-                ResultSet res = requete.getGeneratedKeys();
-                if (res.next()) {
-                int cle = res.getInt(1); 
-                System.out.println("Cle:" + cle);
-                    }
-            
-            if (res != null)
-                res.close();
-                
-            if (requete != null)
-                requete.close();
-                
-            if (laConnexion != null)
-                laConnexion.close();
-                
-        } catch (SQLException sqle) {
-                System.out.println("Pb dans select " + sqle.getMessage());
-                }
-        }    
-    
-        
-        //Modifier Client
-
-        public void ClientModif(int id_client, String nom, String prenom , String no_rue , String voie , String code_postal , String ville , String pays) {
-            try {
-                Connexion c = new Connexion();
-                Connection laConnexion = c.creeConnexion();
-                PreparedStatement requete = 
-                 
-                	
-                		
-                laConnexion.prepareStatement("update Client set nom =?, prenom =?, no_rue =?, voie =?, code_postal=?, ville=?, pays=? where id_client =?");
-                requete.setString(1, nom);
-                requete.setString(2, prenom);
-                requete.setString(3, no_rue);
-                requete.setString(4, voie);
-                requete.setString(5, code_postal);
-                requete.setString(6, ville);
-                requete.setString(7, pays);
-                requete.setInt(8, id_client);
-                
-                int nbLignes = requete.executeUpdate();
-                System.out.println("Update:" + nbLignes);
-                
-            if (requete != null)
-                requete.close();
-                
-            if (laConnexion != null)
-                laConnexion.close();
-                
-        } catch (SQLException sqle) {
-                System.out.println("Pb dans select " + sqle.getMessage());
-                }
-        }
-        
-        
         
 }

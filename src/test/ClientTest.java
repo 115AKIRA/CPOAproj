@@ -202,7 +202,7 @@ class ClientTest {
     public void testCodePostal1OK() {
         try {
             
-            this.c.setCode_postal("57000");
+            this.c.setCodePostal("57000");
         } catch ( IllegalArgumentException iae ) {
         	fail("Exception anormale!");
         }
@@ -212,7 +212,7 @@ class ClientTest {
 	public void testCodePostal2OK() {
         try {
             
-            this.c.setCode_postal("L-50");
+            this.c.setCodePostal("L-50");
         } catch ( IllegalArgumentException iae ) {
         	fail("Exception anormale !");
         }
@@ -222,7 +222,7 @@ class ClientTest {
 	public void testCodePostal3NOK() {
         try {
             
-            this.c.setCode_postal("abc");
+            this.c.setCodePostal("abc");
             fail("Exception non lancée !");
         } catch ( IllegalArgumentException iae ) {
 
@@ -233,7 +233,7 @@ class ClientTest {
 	public void testCodePostal4NOK() {
         try {
             
-            this.c.setCode_postal("");
+            this.c.setCodePostal("");
             fail("Exception non lancée !");
         } catch ( IllegalArgumentException iae ) {
 
