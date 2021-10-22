@@ -48,6 +48,7 @@ public class Client {
 	}
 
 	public void setIdClient(int idClient) {
+		// pas de verification : obligatoirement un int, et en autoincrement
 		this.idClient = idClient;
 	}
 
@@ -214,6 +215,19 @@ public class Client {
 		return "Client [idClient=" + idClient + ", nom=" + nom + ", prenom=" + prenom + ", noRue=" + noRue + ", voie="
 				+ voie + ", codePostal=" + codePostal + ", ville=" + ville + ", pays=" + pays + "]";
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		if (idClient != other.idClient)
+			return false;
+		return true;
+	}
         
 }

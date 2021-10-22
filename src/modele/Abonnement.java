@@ -35,20 +35,16 @@ public class Abonnement {
 	}
 
 	public void setIdAbonnement(int idAbonnement) {
+		// pas de verification : obligatoirement un int, et tout inserts en autoincrements
 		this.idAbonnement = idAbonnement;
 	}
 	
-	public Abonnement(int idRevue) {
-		super();
-		this.idRevue = idRevue;
-	}
-
 	public int getIdClient() {
 		return idClient;
 	}
-
 	
 	public void setIdClient(int idClient) {
+		// pas de verification : obligatoirement un int, et tout est une clé étrangère
 		this.idClient = idClient;
 	}
 
@@ -57,6 +53,7 @@ public class Abonnement {
 	}
 
 	public void setDateDebut(LocalDate dateDebut) {
+		// pas de verification : on considère que l'on peut ajouter une date supérieure à la date courante, mais pour la date fin...
 		this.dateDebut = dateDebut;
 	}
 
@@ -65,6 +62,9 @@ public class Abonnement {
 	}
 
 	public void setDateFin(LocalDate dateFin) {
+		if ( dateFin.isBefore(this.dateDebut) || (this.dateDebut == null )) {
+			System.out.println("Erreur ! Date de fin invalide !");
+		}
 		this.dateFin = dateFin;
 	}
 
@@ -73,6 +73,7 @@ public class Abonnement {
 	}
 
 	public void setIdRevue(int idRevue) {
+		// pas de verification : obligatoirement un int, et tout est une clé étrangère
 		this.idRevue = idRevue;
 	}
 
@@ -81,5 +82,20 @@ public class Abonnement {
 		return "Abonnement [idClient=" + idClient + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
 				+ ", idAbonnement=" + idAbonnement + ", idRevue=" + idRevue + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Abonnement other = (Abonnement) obj;
+		if (idAbonnement != other.idAbonnement)
+			return false;
+		return true;
+	}
+	
 
 }

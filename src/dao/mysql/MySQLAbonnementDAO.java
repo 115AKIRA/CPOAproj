@@ -35,7 +35,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 			laConnexion.prepareStatement("insert into Abonnement (date_debut, date_fin, id_client, id_revue) values(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			requete.setDate(1, Date.valueOf(formatage.format(objet.getDateDebut())));
-			requete.setDate(1, Date.valueOf(formatage.format(objet.getDateDebut())));
+			requete.setDate(2, Date.valueOf(formatage.format(objet.getDateFin())));
 			requete.setInt(3, objet.getIdClient());
 			requete.setInt(4, objet.getIdRevue());
 				
@@ -61,7 +61,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO{
 				laConnexion.prepareStatement("update Abonnement set date_debut =?, date_fin =?, id_client =?, id_revue =? where id_abonnement =?");
 				DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				requete.setDate(1, Date.valueOf(formatage.format(objet.getDateDebut())));
-				requete.setDate(1, Date.valueOf(formatage.format(objet.getDateDebut())));
+				requete.setDate(2, Date.valueOf(formatage.format(objet.getDateFin())));
 				requete.setInt(3, objet.getIdClient());
 				requete.setInt(4, objet.getIdRevue());
 				requete.setInt(5, objet.getIdAbonnement());

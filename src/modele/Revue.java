@@ -18,9 +18,17 @@ public class Revue {
 		this.visuel = visuel;
 		this.idPeriodicite = idPeriodicite;
 	}
-
-	public Revue() {
+	
+	public Revue(String titre, String description, float tarifNumero, String visuel, int idPeriodicite) {
+		super();
+		this.titre = titre;
+		this.description = description;
+		this.tarifNumero = tarifNumero;
+		this.visuel = visuel;
+		this.idPeriodicite = idPeriodicite;
 	}
+
+	public Revue() {}
 
 	public int getIdRevue() {
 		return idRevue;
@@ -75,5 +83,21 @@ public class Revue {
 		return "Revue [idRevue=" + idRevue + ", titre=" + titre + ", description=" + description + ", tarifNumero="
 				+ tarifNumero + ", visuel=" + visuel + ", idPeriodicite=" + idPeriodicite + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Revue other = (Revue) obj;
+		if (idRevue != other.idRevue)
+			return false;
+		return true;
+	}
+	
+	
 
 }
