@@ -57,7 +57,7 @@ public class Abonnement {
 	}
 
 	public void setDateDebut(LocalDate dateDebut) throws DateTimeException {
-		// pas de verification : on considère que l'on peut ajouter une date supérieure à la date courante, mais pour la date fin...
+		// pas de verification : on considère que l'on peut ajouter une date supérieure à la date courante
 		this.dateDebut = dateDebut;
 	}
 
@@ -77,7 +77,7 @@ public class Abonnement {
 	}
 
 	public void setIdRevue(int idRevue) {
-		// pas de verification : obligatoirement un int, et tout est une clé étrangère
+		// pas de verification : obligatoirement un int, et est une clé étrangère
 		this.idRevue = idRevue;
 	}
 

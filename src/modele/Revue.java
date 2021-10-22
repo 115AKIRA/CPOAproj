@@ -40,6 +40,7 @@ public class Revue {
 	}
 
 	public void setIdRevue(int idRevue) {
+		// pas de verification : obligatoirement un int, et en autoincrement
 		this.idRevue = idRevue;
 	}
 
@@ -48,6 +49,7 @@ public class Revue {
 	}
 
 	public void setTitre(String titre) {
+		// pas de verification : peut comporter des chiffres ( comme une date )
 		this.titre = titre;
 	}
 
@@ -56,6 +58,7 @@ public class Revue {
 	}
 
 	public void setDescription(String description) {
+		// pas de verification : peut comporter des chiffres ( comme une date )
 		this.description = description;
 	}
 
@@ -64,6 +67,7 @@ public class Revue {
 	}
 
 	public void setTarifNumero(float tarifNumero) {
+		// pas de verification : obligatoirement un float
 		this.tarifNumero = tarifNumero;
 	}
 
@@ -72,6 +76,7 @@ public class Revue {
 	}
 
 	public void setVisuel(String visuel) {
+		// pas de verification : peut contenir des chiffres ( comme une date )
 		this.visuel = visuel;
 	}
 
@@ -80,6 +85,7 @@ public class Revue {
 	}
 
 	public void setIdPeriodicite(int idPeriodicite) {
+		// pas de verification : obligatoirement un int, et est une clé etrangère
 		this.idPeriodicite = idPeriodicite;
 	}
 

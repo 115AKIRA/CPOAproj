@@ -74,7 +74,11 @@ public class Client {
 	}
 
 	public void setPrenom(String prenom) {
+		if (prenom.matches("[0-9]+")) {
+			System.out.println("Le prenom doit comporter uniquement des lettres !");
+		} else {
 		this.prenom = prenom;
+		}
 	}
 
 	public String getNoRue() {

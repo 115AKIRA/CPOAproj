@@ -28,6 +28,7 @@ public class Periodicite {
 	}
 
 	public void setIdPeriodicite(int idPeriodicite) {
+		// pas de verification : obligatoirement un int, et en autoincrement
 		this.idPeriodicite = idPeriodicite;
 	}
 
@@ -36,7 +37,11 @@ public class Periodicite {
 	}
 
 	public void setLibelle(String libelle) {
+		if (libelle.matches("[0-9]+")) {
+			System.out.println("Le libelle doit comporter uniquement des lettres !");
+		} else {
 		this.libelle = libelle;
+		}
 	}
 
 	@Override
