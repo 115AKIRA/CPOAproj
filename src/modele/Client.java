@@ -86,7 +86,11 @@ public class Client {
 	}
 
 	public void setNoRue(String noRue) {
+		if (noRue.matches("[a-zA-Z]+")) {
+			System.out.println("Le numero de rue doit comporter uniquement des chiffres !");
+		} else {
 		this.noRue = noRue;
+		}
 	}
 
 	public String getVoie() {

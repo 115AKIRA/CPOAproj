@@ -65,13 +65,13 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO {
 		
 		int nbLigne = 0; 
 
-			Connection laConnexion = Connexion.getInstance().creeConnexion();
-			PreparedStatement requete = 
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = 
 			
-			laConnexion.prepareStatement("delete from Periodicite where id_periodicite=?");
-			requete.setInt(1, objet.getIdPeriodicite());
+		laConnexion.prepareStatement("delete from Periodicite where id_periodicite=?");
+		requete.setInt(1, objet.getIdPeriodicite());
 			
-			nbLigne = requete.executeUpdate();
+		nbLigne = requete.executeUpdate();
 		
 		return nbLigne == 1;
 	}
