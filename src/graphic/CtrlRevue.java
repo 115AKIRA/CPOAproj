@@ -4,12 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import dao.factory.DAOFactory;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -20,7 +21,7 @@ import modele.Periodicite;
 import modele.Revue;
 
 
-public class Controleur {
+public class CtrlRevue implements Initializable {
     @FXML private Button btn_creer;
     @FXML private TextField txt_Tarif;
     @FXML private TextField txt_Titre;
@@ -34,7 +35,8 @@ public class Controleur {
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
     	
     try {
-		combo_Periodicite.getItems().setAll(DAO.getPeriodiciteDAO().findAll());
+		combo_Periodicite.setItems(FXCollections.observableArrayList(DAO.getPeriodiciteDAO().findAll()));
+		
 		lbl_recap.setText("");
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -80,7 +82,8 @@ public class Controleur {
     		r.setTitre(txt_Titre.getText());
     		r.setDescription(txt_Description.getText());
     		r.setTarifNumero(Float.parseFloat(txt_Tarif.getText()));
-    		//r.setIdPeriodicite(combo_Periodicite.getItems());
+    		r.setIdPeriodicite(combo_Periodicite.getSelectionModel().getSelectedIndex());   
+    		
     		try {
 				DAO.getRevueDAO().create(r);
 			} catch (Exception e) {
@@ -99,7 +102,6 @@ public class Controleur {
     		Node root = fxmlLoader.load();
     		Scene scene = new Scene((VBox) root, 640, 400);
     		
-    		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
     		primaryStage.setScene(scene);
     		primaryStage.setTitle("Ma première fenêtre JavaFX");
     		primaryStage.show();
