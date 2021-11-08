@@ -46,7 +46,7 @@ public class Periodicite {
 
 	@Override
 	public String toString() {
-		return "Periodicite [idPeriodicite=" + idPeriodicite + ", libelle=" + libelle + "]";
+		return libelle;
 	}
 
 	@Override
