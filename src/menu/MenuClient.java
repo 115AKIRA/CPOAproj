@@ -58,11 +58,22 @@ public class MenuClient {
 			
 		choixPersistance();
 		
+		Client cl = new Client();
+		cl.setNom("nom");
+		cl.setPrenom("prenom");
+		cl.setCodePostal("54891");
+		cl.setNoRue("15");
+		cl.setPays("suisse");
+		cl.setVille("moineville");
+		cl.setVoie("15 avenue fosh");
+		DAO.getClientDAO().create(cl);
+		
 		System.out.println("Que voulez vous faire ? :");
 		System.out.println("1) Créer un client");
 		System.out.println("2) Modifier un client");
 		System.out.println("3) Supprimer un client");
 		System.out.println("4) Retour au menu");
+		System.out.println("5) Importer CVS client");
 		
 		int choix = entree.nextInt();
 		
@@ -122,9 +133,13 @@ public class MenuClient {
 		case(4) :
 			Main.main(args);
 			break;
-	}
+		case(5) :
+			System.out.println("Veuillez saisir le lien de votre fichier en absolu : ");
+			String path = entree.next();
+			DAO.getClientDAO().CSVtoSQL(path);
+		}
 		entree.close();
-		
+
 		} catch(NumberFormatException iae) {
 			System.out.println("Veuillez faire un choix valide.");
 			main(args);

@@ -218,6 +218,9 @@ public class Client {
 			case("schweiz"):
 				this.pays = ("Suisse");
 				break;
+			case("france"):
+				this.pays = ("France");
+				break;
 			default:
 				throw new IllegalArgumentException("Pays non reconnu !");
 		}

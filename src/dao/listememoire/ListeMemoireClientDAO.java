@@ -1,5 +1,10 @@
 package dao.listememoire;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,4 +104,51 @@ public class ListeMemoireClientDAO implements ClientDAO {
             return (ArrayList<Client>) this.donnees;
         }
     }
+	
+	public String CSVtoSQL(String path) throws IOException {
+
+		try {
+			Paths.get(path);
+		} catch (InvalidPathException | NullPointerException ex) {
+			return "Chemin n'existe pas ou est vide";
+		}
+
+		String line = "";
+
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			String[] client = null;
+			while ((line = br.readLine()) != null)  {  
+				client = line.split(",");
+			}
+			
+			br.close();
+
+			if ( client.length != 8 ) {
+				return "Fichier incorrect";
+			} else try {
+				Integer.parseInt(client[0]);
+				Client c = new Client();
+				c.setNom(client[1]);
+				c.setPrenom(client[2]);
+				c.setNoRue(client[3]);
+				c.setVoie(client[4]);
+				c.setCodePostal(client[5]);
+				c.setVille(client[6]);
+				c.setPays(client[7]);
+				
+				create(c);
+
+			} catch ( NumberFormatException e ) {
+				return "Fichier de format incorrect";
+			}
+
+		} catch (IOException e) {
+			return "Erreur lors de la lecture";
+		}
+		
+		return "Fichier client crée";
+
+	}
 }

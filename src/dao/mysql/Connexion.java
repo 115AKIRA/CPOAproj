@@ -41,7 +41,7 @@ public class Connexion {
 	
 	public void chargeFichier() {
 		Properties accesBdd = new Properties(); 
-		File fBdd = new File("../resources/config/bdd.properties");
+		File fBdd = new File("./resources/config/bdd.properties");
 		try { 
 			FileInputStream source = new FileInputStream(fBdd); 
 			accesBdd.loadFromXML(source); 
