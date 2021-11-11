@@ -1,16 +1,16 @@
 # CPOAproj
 CPOA Projet ( TP )
 
-#Repartition des tâches
+# Repartition des tâches
 
 Xavier: Interface graphique ( Squelette & FXML ), Normalisation & Test ( Voie, Code Postal, Ville ), DAO ( Revue et Periodicite )
 Franck: Normalisation & Test ( Pays, Ville, Voie, Revue & Abonnement ), DAO ( Squelette, Client & Abonnement ), Menu en texte
 
-#Investisement
+# Investisement
 
 Xavier 45% / 55% Franck
 
-#Ce qui marche
+# Ce qui marche
 
 De manière inexpliquée, ma connexion à la base de donnée ne fonctionne pas ( alors qu'elle fonctionnait quand on l'avais modifié sous votre aide, et que l'on ne l'a pas modifié depuis )
 Cela signifie que nous n'avont pas été capable de tester quoi que ce soit concernant la base de donnée.
