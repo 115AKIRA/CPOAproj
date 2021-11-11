@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="Accueil" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="48.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -25,34 +25,34 @@
           <RowConstraints maxHeight="132.7999938964844" minHeight="10.0" prefHeight="121.60001220703128" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="136.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="136.0" fitWidth="136.0" onMouseClicked="#versClient" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <image>
                   <Image url="@ressources/client.jpg" />
                </image>
             </ImageView>
-            <Label prefHeight="68.0" prefWidth="116.0" text="Gestion Client" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Label onMouseClicked="#versClient" prefHeight="68.0" prefWidth="116.0" text="Gestion Client" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
             <Line endX="-100.624755859375" endY="500.0" startX="-100.62460327148438" startY="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
             <Line endX="-100.00161743164062" endY="500.0" startX="-100.0" startY="300.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-            <ImageView fitHeight="136.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="136.0" fitWidth="136.0" onMouseClicked="#versRevue" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <image>
                   <Image url="@ressources/livres.jpg" />
                </image>
             </ImageView>
-            <Label prefHeight="68.0" prefWidth="118.0" text="Gestion Revue" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Label onMouseClicked="#versRevue" prefHeight="68.0" prefWidth="118.0" text="Gestion Revue" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <Label prefHeight="68.0" prefWidth="177.0" text="Gestion Abonnement" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Label onMouseClicked="#versAbo" prefHeight="68.0" prefWidth="177.0" text="Gestion Abonnement" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <ImageView fitHeight="136.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="136.0" fitWidth="136.0" onMouseClicked="#versAbo" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <image>
                   <Image url="@ressources/purchaseorderapplication_compra_orde_4474.png" />
                </image>

@@ -1,10 +1,9 @@
-package graphic;
+package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import dao.factory.DAOFactory;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +21,9 @@ import modele.Periodicite;
 import modele.Revue;
 
 
-public class CtrlRevue  extends Application implements Initializable{
+public class ControllerRevue implements Initializable {
     @FXML private Button btn_creer;
+    @FXML private Button btn_sup;
     @FXML private TextField txt_Tarif;
     @FXML private TextField txt_Titre;
     @FXML private TextField txt_Description;
@@ -96,9 +96,9 @@ public class CtrlRevue  extends Application implements Initializable{
     	
     }
     
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
     	try {
-    		URL fxmlURL = getClass().getResource("/RevuePage.fxml");
+    		URL fxmlURL = getClass().getResource("/rrr.fxml");
     		FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
     		Node root = fxmlLoader.load();
     		Scene scene = new Scene((VBox) root, 640, 400);
@@ -110,9 +110,5 @@ public class CtrlRevue  extends Application implements Initializable{
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
-    }
-    
-    public static void main(String[] args) {
-        Application.launch(args);
     }
 }
