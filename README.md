@@ -3,8 +3,8 @@ CPOA Projet ( TP )
 
 # Repartition des tâches
 
-Xavier: Interface graphique ( Squelette & FXML ), Normalisation & Test ( Voie, Code Postal, Ville ), DAO ( Revue et Periodicite )
-Franck: Normalisation & Test ( Pays, Ville, Voie, Revue & Abonnement ), DAO ( Squelette, Client & Abonnement ), Menu en texte
+Xavier: Interface graphique ( Squelette & FXML ), Normalisation & Test ( Voie, Code Postal, Ville ), DAO ( Revue et Periodicite );
+Franck: Normalisation & Test ( Pays, Ville, Voie, Revue & Abonnement ), DAO ( Squelette, Client & Abonnement ), Menu en texte;
 
 # Investisement
 
